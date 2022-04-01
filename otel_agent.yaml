@@ -9,10 +9,6 @@ metadata:
 data:
   otel-agent-config: |
     receivers:
-      otlp:
-        protocols:
-          grpc:
-          http:
 
       hostmetrics:
         collection_interval: 10s
@@ -38,7 +34,7 @@ data:
       kafka:
         protocol_version: 2.0.0
         brokers: kafka-broker-svc:9092
-        topic: otlp
+        topic: otel.node
         auth:
           tls:
             ca_file: /certs/ca.crt
@@ -86,10 +82,7 @@ spec:
         component: otel-agent
     spec:
       containers:
-      - command:
-          - "/otelcol"
-          - "--config=/conf/otel-agent-config.yaml"
-        image: otel/opentelemetry-collector:0.48.0
+      - image: otel/opentelemetry-collector-contrib:0.48.0
         name: otel-agent
         resources:
           limits:
@@ -104,7 +97,7 @@ spec:
         - containerPort: 8888  # Metrics.
         volumeMounts:
         - name: otel-agent-config-vol
-          mountPath: /conf
+          mountPath: /etc/otelcol-contrib
         - name: otel-cluster-config-vol
           mountPath: /certs
       volumes:
@@ -112,7 +105,7 @@ spec:
             name: otel-agent-conf
             items:
               - key: otel-agent-config
-                path: otel-agent-config.yaml
+                path: config.yaml
           name: otel-agent-config-vol
         - configMap:
             name: otel-cluster-config
