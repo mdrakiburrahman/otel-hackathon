@@ -3,8 +3,9 @@
 ## Deployment
 
 1. Deploy arc local with kakfa: `make deploy-arc-local ENABLE_KAFKA=1`
-2. Deploy otel: `make deploy`
-3. Read from kafka: `make read-topic | jq`
+2. Fill in cluster ip and namespace in makefile
+3. Deploy otel agent: `make deploy`
+4. Read from kafka: `make read-topic | jq`
 
 ## Useful commands
 
