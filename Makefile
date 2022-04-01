@@ -12,7 +12,7 @@ OTEL_CONFIGMAP := otel-cluster-config
 
 KCAT_SSL_ARGS := -X security.protocol=SSL -X ssl.certificate.location=$(CERTS_DIR)/certificate.pem -X ssl.key.location=$(CERTS_DIR)/key.pem -X ssl.ca.location=$(CERTS_DIR)/ca.crt
 
-TOPIC ?= otel.node
+NAME ?= otel.node
 
 ######## Commands you care about ##
 
@@ -21,7 +21,7 @@ deploy: config
 	kubectl apply -f ./otel_collector.yaml -n $(NAMESPACE)
 
 read-topic: ssl-files
-	$(AT)kafkacat -b $(CLUSTER_IP):31052 -t $(TOPIC) $(KCAT_SSL_ARGS)
+	$(AT)kafkacat -b $(CLUSTER_IP):31052 -t $(NAME) $(KCAT_SSL_ARGS)
 
 list-topics: ssl-files
 	$(AT)kafkacat -b $(CLUSTER_IP):31052 -L $(KCAT_SSL_ARGS)
