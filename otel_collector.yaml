@@ -10,6 +10,10 @@ data:
     receivers:
       fluentforward:
         endpoint: 0.0.0.0:8006
+      
+      collectd:
+        timeout: "50s"
+        endpoint: 0.0.0.0:8007
 
     processors:
       batch:
@@ -30,10 +34,21 @@ data:
 
     exporters:
 
-      kafka:
+      kafka/fluent:
         protocol_version: 2.0.0
         brokers: kafka-broker-svc:9092
         topic: otel.fluent
+        auth:
+          tls:
+            ca_file: /certs/ca.crt
+            cert_file: /certs/certificate.pem
+            key_file: /certs/key.pem
+        encoding: otlp_json
+      
+      kafka/collectd:
+        protocol_version: 2.0.0
+        brokers: kafka-broker-svc:9092
+        topic: otel.collectd
         auth:
           tls:
             ca_file: /certs/ca.crt
@@ -47,7 +62,11 @@ data:
         logs:
           receivers: [fluentforward]
           processors: [memory_limiter, batch]
-          exporters: [kafka]
+          exporters: [kafka/fluent]
+        metrics:
+          receivers: [collectd]
+          processors: [memory_limiter, batch]
+          exporters: [kafka/collectd]
 ---
 apiVersion: v1
 kind: Service
@@ -62,6 +81,10 @@ spec:
     port: 8006
     protocol: TCP
     targetPort: 8006
+  - name: collectd-https # Default endpoint for OpenTelemetry gRPC receiver.
+    port: 8007
+    protocol: TCP
+    targetPort: 8007
   - name: metrics # Default endpoint for querying metrics.
     port: 8888
   selector:
@@ -81,7 +104,7 @@ spec:
       component: otel-collector
   minReadySeconds: 5
   progressDeadlineSeconds: 120
-  replicas: 1 #TODO - adjust this to your own requirements
+  replicas: 3 #TODO - adjust this to your own requirements
   template:
     metadata:
       labels:
@@ -102,6 +125,8 @@ spec:
         - containerPort: 55679 # Default endpoint for ZPages.
         - containerPort: 9411 # Default endpoint for Zipkin receiver.
         - containerPort: 8888  # Default endpoint for querying metrics.
+        - containerPort: 8006  # fluent.
+        - containerPort: 8007  # collectd.
         volumeMounts:
         - name: otel-collector-config-vol
           mountPath: /etc/otelcol-contrib
