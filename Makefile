@@ -32,25 +32,31 @@ list-topics: ssl-files
 
 config: ssl-files 
 	$(AT)kubectl delete configmap -n $(NAMESPACE) $(OTEL_CONFIGMAP) || true
-	kubectl create configmap $(OTEL_CONFIGMAP) -n $(NAMESPACE) --from-file=$(CERTS_DIR)/ca.crt --from-file=$(CERTS_DIR)/key.pem --from-file=$(CERTS_DIR)/certificate.pem
+	kubectl create configmap $(OTEL_CONFIGMAP) -n $(NAMESPACE) --from-file=$(CERTS_DIR)/ca.crt --from-file=$(CERTS_DIR)/kafka-key.pem --from-file=$(CERTS_DIR)/kafka-cert.pem --from-file=$(CERTS_DIR)/fluentbit-cert.pem --from-file=$(CERTS_DIR)/fluentbit-key.pem
 
 .PHONY: config
 
 ######## Generate Certs ###########
 
-ssl-files: certs/certificate.pem certs/key.pem certs/ca.crt
+ssl-files: certs/kafka-cert.pem certs/kafka-key.pem certs/ca.crt certs/fluentbit-cert.pem certs/fluentbit-key.pem
 
 certs:
 	mkdir -p certs
 
-certs/certificate.pem: | certs
-	$(AT)kubectl cp -n $(NAMESPACE) -c kafka-broker kafka-broker-0:$(CONTAINER_CERTS_DIR)/kafka-broker/kafka-broker-certificate.pem $(CERTS_DIR)/certificate.pem
+certs/kafka-cert.pem: | certs
+	$(AT)kubectl cp -n $(NAMESPACE) -c kafka-broker kafka-broker-0:$(CONTAINER_CERTS_DIR)/kafka-broker/kafka-broker-certificate.pem $(CERTS_DIR)/kafka-cert.pem
 
-certs/key.pem: | certs
-	$(AT)kubectl cp -n $(NAMESPACE) -c kafka-broker kafka-broker-0:$(CONTAINER_CERTS_DIR)/kafka-broker/kafka-broker-privatekey.pem $(CERTS_DIR)/key.pem
+certs/kafka-key.pem: | certs
+	$(AT)kubectl cp -n $(NAMESPACE) -c kafka-broker kafka-broker-0:$(CONTAINER_CERTS_DIR)/kafka-broker/kafka-broker-privatekey.pem $(CERTS_DIR)/kafka-key.pem
 
 certs/ca.crt: | certs
 	$(AT)kubectl get configmap -n $(NAMESPACE) cluster-configmap -o=jsonpath='{.data.cluster-ca-certificate\.crt}' >> $(CERTS_DIR)/ca.crt
+
+certs/fluentbit-cert.pem: | certs
+	$(AT)kubectl cp -n $(NAMESPACE) -c fluentbit logsdb-0:$(CONTAINER_CERTS_DIR)/fluentbit/fluentbit-certificate.pem $(CERTS_DIR)/fluentbit-cert.pem
+
+certs/fluentbit-key.pem: | certs
+	$(AT)kubectl cp -n $(NAMESPACE) -c fluentbit logsdb-0:$(CONTAINER_CERTS_DIR)/fluentbit/fluentbit-privatekey.pem $(CERTS_DIR)/fluentbit-key.pem
 
 .PHONY: ssl-files
 

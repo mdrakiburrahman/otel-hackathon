@@ -34,6 +34,7 @@ data:
 
     exporters:
 
+
       kafka/fluent:
         protocol_version: 2.0.0
         brokers: kafka-broker-svc:9092
@@ -41,8 +42,8 @@ data:
         auth:
           tls:
             ca_file: /certs/ca.crt
-            cert_file: /certs/certificate.pem
-            key_file: /certs/key.pem
+            cert_file: /certs/kafka-cert.pem
+            key_file: /certs/kafka-key.pem
         encoding: otlp_json
       
       kafka/collectd:
@@ -52,9 +53,19 @@ data:
         auth:
           tls:
             ca_file: /certs/ca.crt
-            cert_file: /certs/certificate.pem
-            key_file: /certs/key.pem
+            cert_file: /certs/kafka-cert.pem
+            key_file: /certs/kafka-key.pem
         encoding: otlp_json
+      
+      elasticsearch:
+        endpoints:
+        - "https://logsdb-svc:9200"
+        index: logstash-
+        tls:
+          ca_file: /certs/ca.crt
+          cert_file: /certs/fluentbit-cert.pem
+          key_file: /certs/fluentbit-key.pem
+
 
     service:
       extensions: [zpages, memory_ballast]
@@ -62,7 +73,7 @@ data:
         logs:
           receivers: [fluentforward]
           processors: [memory_limiter, batch]
-          exporters: [kafka/fluent]
+          exporters: [kafka/fluent, elasticsearch]
         metrics:
           receivers: [collectd]
           processors: [memory_limiter, batch]
@@ -144,8 +155,12 @@ spec:
             items:
               - key: ca.crt
                 path: ca.crt
-              - key: certificate.pem
-                path: certificate.pem
-              - key: key.pem
-                path: key.pem
+              - key: kafka-cert.pem
+                path: kafka-cert.pem
+              - key: kafka-key.pem
+                path: kafka-key.pem
+              - key: fluentbit-cert.pem
+                path: fluentbit-cert.pem
+              - key: fluentbit-key.pem
+                path: fluentbit-key.pem
           name: otel-cluster-config-vol
