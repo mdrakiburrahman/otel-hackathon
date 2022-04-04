@@ -10,7 +10,7 @@ CERTS_DIR := $(MAKEFILE_PATH)certs
 
 OTEL_CONFIGMAP := otel-cluster-config
 
-KCAT_SSL_ARGS := -X security.protocol=SSL -X ssl.certificate.location=$(CERTS_DIR)/certificate.pem -X ssl.key.location=$(CERTS_DIR)/key.pem -X ssl.ca.location=$(CERTS_DIR)/ca.crt
+KCAT_SSL_ARGS := -X security.protocol=SSL -X ssl.certificate.location=$(CERTS_DIR)/kafka-cert.pem -X ssl.key.location=$(CERTS_DIR)/kafka-key.pem -X ssl.ca.location=$(CERTS_DIR)/ca.crt
 
 NAME ?= otel.node
 

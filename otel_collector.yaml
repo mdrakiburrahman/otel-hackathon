@@ -60,7 +60,7 @@ data:
       elasticsearch:
         endpoints:
         - "https://logsdb-svc:9200"
-        index: logstash-
+        index: logstash-otel
         tls:
           ca_file: /certs/ca.crt
           cert_file: /certs/fluentbit-cert.pem
