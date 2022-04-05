@@ -42,6 +42,14 @@ data:
             key_file: /certs/kafka-key.pem
         encoding: otlp_json
 
+      influxdb:
+        endpoint: http://otel-influx-svc:8086
+        org: arcdata
+        bucket: metrics
+        token: admin1234
+        tls:
+          min_version: 1.2
+
     processors:
       batch:
       memory_limiter:
@@ -61,7 +69,7 @@ data:
         metrics:
           receivers: [hostmetrics]
           processors: [memory_limiter, batch]
-          exporters: [kafka]
+          exporters: [kafka, influxdb, otlp]
 ---
 apiVersion: apps/v1
 kind: DaemonSet

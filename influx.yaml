@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+  name: otel-influx-external-svc
+spec:
+  ports:
+  - name: influx-external-31055
+    nodePort: 31055
+    port: 31055
+    protocol: TCP
+    targetPort: 8086
+  selector:
+    app: otel-influxdb
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-influx-svc
+  labels:
+    app: otel-influx
+spec:
+  ports:
+  - name: influx # Default endpoint for querying metrics.
+    port: 8086
+  selector:
+    app: otel-influxdb
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: otel-influxdb
+  labels:
+    app: otel-influxdb
+spec:
+  selector:
+    matchLabels:
+      app: otel-influxdb
+  serviceName: otel-influx-svc
+  template:
+    metadata:
+      labels:
+        app: otel-influxdb
+    spec:
+      containers:
+      - env:
+        - name: DOCKER_INFLUXDB_INIT_USERNAME
+          value: "admin"
+        - name: DOCKER_INFLUXDB_INIT_PASSWORD
+          value: "AAAbbb1234"
+        - name: DOCKER_INFLUXDB_INIT_ORG
+          value: "arcdata"
+        - name: DOCKER_INFLUXDB_INIT_BUCKET
+          value: "metrics"
+        - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
+          value: "admin1234"
+        - name: DOCKER_INFLUXDB_INIT_MODE
+          value: setup
+        image: influxdb:2.1.1
+        name: influxdb
+        resources:
+          limits:
+            cpu: 500m
+            memory: 2G
+          requests:
+            cpu: 100m
+            memory: 1G
+        ports:
+        - containerPort: 8086 # ZPages endpoint.
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/influxdb2
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: local-storage
+      volumeMode: Filesystem

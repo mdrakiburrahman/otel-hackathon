@@ -19,6 +19,7 @@ NAME ?= otel.node
 deploy: config
 	kubectl apply -f ./otel_agent.yaml -n $(NAMESPACE)
 	kubectl apply -f ./otel_collector.yaml -n $(NAMESPACE)
+	kubectl apply -f ./influx.yaml -n $(NAMESPACE)
 
 read-topic: ssl-files
 	$(AT)kafkacat -b $(CLUSTER_IP):31052 -t $(NAME) $(KCAT_SSL_ARGS)
@@ -38,7 +39,7 @@ config: ssl-files
 
 ######## Generate Certs ###########
 
-ssl-files: certs/kafka-cert.pem certs/kafka-key.pem certs/ca.crt certs/fluentbit-cert.pem certs/fluentbit-key.pem
+ssl-files: certs/kafka-cert.pem certs/kafka-key.pem certs/ca.crt certs/fluentbit-cert.pem certs/fluentbit-key.pem | certs
 
 certs:
 	mkdir -p certs
@@ -69,6 +70,7 @@ clean:
 
 deploy-clean:
 	kubectl delete -f $(MAKEFILE_PATH)/otel_agent.yaml -n $(NAMESPACE) || true
+	kubectl delete -f $(MAKEFILE_PATH)/influx.yaml -n $(NAMESPACE) || true
 	kubectl delete -d $(MAKEFILE_PATH)/otel_collector.yaml -n $(NAMESPACE) || true
 	kubectl delete configmap -n $(NAMESPACE) $(OTEL_CONFIGMAP) || true
 	kubectl delete deployment -n $(NAMESPACE) otel-collector || true
