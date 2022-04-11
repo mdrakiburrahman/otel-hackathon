@@ -21,15 +21,6 @@ data:
           network:
 
     exporters:
-      otlp:
-        endpoint: "otel-collector.default:4317"
-        tls:
-          insecure: true
-        sending_queue:
-          num_consumers: 4
-          queue_size: 100
-        retry_on_failure:
-          enabled: true
     # Data sources: traces
       kafka:
         protocol_version: 2.0.0
@@ -58,18 +49,20 @@ data:
         # 25% of limit up to 2G
         spike_limit_mib: 100
         check_interval: 5s
+
     extensions:
       zpages: {}
       memory_ballast:
         # Memory Ballast size should be max 1/3 to 1/2 of memory.
         size_mib: 165
+
     service:
       extensions: [zpages, memory_ballast]
       pipelines:
         metrics:
           receivers: [hostmetrics]
           processors: [memory_limiter, batch]
-          exporters: [kafka, influxdb, otlp]
+          exporters: [kafka, influxdb]
 ---
 apiVersion: apps/v1
 kind: DaemonSet

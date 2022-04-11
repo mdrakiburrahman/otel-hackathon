@@ -31,9 +31,13 @@ list-topics: ssl-files
 
 ######## Generate Configmap #######
 
-config: ssl-files 
+config: ssl-files jaas-config
 	$(AT)kubectl delete configmap -n $(NAMESPACE) $(OTEL_CONFIGMAP) || true
 	kubectl create configmap $(OTEL_CONFIGMAP) -n $(NAMESPACE) --from-file=$(CERTS_DIR)/ca.crt --from-file=$(CERTS_DIR)/kafka-key.pem --from-file=$(CERTS_DIR)/kafka-cert.pem --from-file=$(CERTS_DIR)/fluentbit-cert.pem --from-file=$(CERTS_DIR)/fluentbit-key.pem
+
+jaas-config:
+	$(AT)kubectl delete configmap -n $(NAMESPACE) jaas-configmap || true
+	kubectl create configmap jaas-configmap -n $(NAMESPACE) --from-file jaas.conf
 
 .PHONY: config
 
@@ -73,6 +77,7 @@ deploy-clean:
 	kubectl delete -f $(MAKEFILE_PATH)/influx.yaml -n $(NAMESPACE) || true
 	kubectl delete -d $(MAKEFILE_PATH)/otel_collector.yaml -n $(NAMESPACE) || true
 	kubectl delete configmap -n $(NAMESPACE) $(OTEL_CONFIGMAP) || true
+	kubectl delete configmap -n $(NAMESPACE) otel-collector-conf || true
 	kubectl delete deployment -n $(NAMESPACE) otel-collector || true
 
 debug:

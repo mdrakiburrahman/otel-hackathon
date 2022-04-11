@@ -32,6 +32,21 @@ data:
         # Memory Ballast size should be max 1/3 to 1/2 of memory.
         size_mib: 683
 
+      http_forwarder/collectd:
+        ingress:
+          endpoint: 0.0.0.0:8017
+          tls:
+            ca_file: /certs/ca.crt
+            cert_file: /certs/kafka-cert.pem
+            key_file: /certs/kafka-key.pem
+        egress:
+          endpoint: https://0.0.0.0:8007
+          tls:
+            ca_file: /certs/ca.crt
+            cert_file: /certs/kafka-cert.pem
+            key_file: /certs/kafka-key.pem
+      
+
     exporters:
 
       influxdb:
@@ -61,6 +76,17 @@ data:
             cert_file: /certs/kafka-cert.pem
             key_file: /certs/kafka-key.pem
       
+      kafka/eh:
+        protocol_version: 2.0.0
+        brokers: jakedern-otel-eh.servicebus.windows.net:9093
+        topic: otel-logs
+        auth:
+          sasl:
+            mechanism: PLAIN
+            username: $ConnectionString
+            password: ""
+          tls:
+            insecure: true
       elasticsearch:
         endpoints:
         - "https://logsdb-svc:9200"
@@ -72,16 +98,20 @@ data:
 
 
     service:
-      extensions: [zpages, memory_ballast]
+      extensions: [zpages, memory_ballast, http_forwarder/collectd]
       pipelines:
         logs:
           receivers: [fluentforward]
           processors: [memory_limiter, batch]
-          exporters: [kafka/fluent, elasticsearch]
+          exporters: [kafka/fluent, elasticsearch, kafka/eh]
         metrics:
           receivers: [collectd]
           processors: [memory_limiter, batch]
           exporters: [kafka/collectd, influxdb]
+      telemetry:
+        logs:
+          level: debug
+          development: true
 ---
 apiVersion: v1
 kind: Service
@@ -97,11 +127,13 @@ spec:
     protocol: TCP
     targetPort: 8006
   - name: collectd-http # Default endpoint for OpenTelemetry gRPC receiver.
-    port: 8007
+    port: 8017
     protocol: TCP
-    targetPort: 8007
+    targetPort: 8017
   - name: metrics # Default endpoint for querying metrics.
     port: 8888
+  - name: collectd-https
+    port: 8007
   selector:
     component: otel-collector
 ---
@@ -129,6 +161,9 @@ spec:
       containers:
       - image: otel/opentelemetry-collector-contrib:0.48.0
         name: otel-collector
+        env:
+        - name: ConnectionString
+          value: "$ConnectionString"
         resources:
           limits:
             cpu: 1
