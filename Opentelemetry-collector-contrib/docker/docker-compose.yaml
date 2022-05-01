@@ -32,6 +32,7 @@ services:
       - jaeger-all-in-one
       - zipkin-all-in-one
 
+  # Client
   demo-client:
     build:
       dockerfile: Dockerfile
@@ -42,6 +43,7 @@ services:
     depends_on:
       - demo-server
 
+  # Server
   demo-server:
     build:
       dockerfile: Dockerfile
@@ -53,6 +55,7 @@ services:
     depends_on:
       - otel-collector
 
+  # Prometheus
   prometheus:
     container_name: prometheus
     image: prom/prometheus:latest

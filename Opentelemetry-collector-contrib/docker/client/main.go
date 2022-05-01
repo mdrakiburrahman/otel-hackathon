@@ -52,9 +52,10 @@ func initProvider() func() {
 
 	otelAgentAddr, ok := os.LookupEnv("OTEL_EXPORTER_OTLP_ENDPOINT")
 	if !ok {
-		otelAgentAddr = "0.0.0.0:4317"
+		otelAgentAddr = "0.0.0.0:4317" // OTEl Collector gRPC endpoint
 	}
 
+	// Metrics
 	metricClient := otlpmetricgrpc.NewClient(
 		otlpmetricgrpc.WithInsecure(),
 		otlpmetricgrpc.WithEndpoint(otelAgentAddr))
@@ -74,6 +75,7 @@ func initProvider() func() {
 	err = pusher.Start(ctx)
 	handleErr(err, "Failed to start metric pusher")
 
+	// Tracing
 	traceClient := otlptracegrpc.NewClient(
 		otlptracegrpc.WithInsecure(),
 		otlptracegrpc.WithEndpoint(otelAgentAddr),
@@ -167,7 +169,7 @@ func main() {
 
 	defaultCtx := baggage.ContextWithBaggage(context.Background(), bag)
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
-	for {
+	for { // Infinite loop per second
 		startTime := time.Now()
 		ctx, span := tracer.Start(defaultCtx, "ExecuteRequest")
 		makeRequest(ctx)

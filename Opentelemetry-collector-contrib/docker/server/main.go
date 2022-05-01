@@ -47,6 +47,8 @@ var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 // Initializes an OTLP exporter, and configures the corresponding trace and
 // metric providers.
+
+// Identical to client code
 func initProvider() func() {
 	ctx := context.Background()
 
@@ -117,6 +119,7 @@ func initProvider() func() {
 	}
 }
 
+// Identical to client code
 func handleErr(err error, message string) {
 	if err != nil {
 		log.Fatalf("%s: %v", message, err)
