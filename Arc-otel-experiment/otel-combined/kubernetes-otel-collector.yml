@@ -115,8 +115,8 @@ spec:
             cpu: 1
             memory: 2Gi
           requests:
-            cpu: 200m
-            memory: 400Mi
+            cpu: 0.5
+            memory: 1Gi
         ports:
         - containerPort: 55679 # Default endpoint for ZPages.
         - containerPort: 9411 # Default endpoint for Zipkin receiver.

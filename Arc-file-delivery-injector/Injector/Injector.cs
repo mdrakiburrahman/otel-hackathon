@@ -10,7 +10,7 @@ namespace TestApp1
     {
         static void Main(string[] args)
         {
-            string connString = @"Server = 172.31.147.204; Database = controller; User ID = controldb-rw-user; Password = ZiehzGZM0GuxoRptQO8PKTZ3kz0B6En4;";
+            string connString = @"Server = 172.28.113.204; Database = controller; User ID = controldb-rw-user; Password = V2PtzVq9iW8pnJ-qi33GRqw8aumYmxPV;"; // <------ CHANGE HERE
             string targetFile = @"/config/namespaces/arc/scaledsets/sql-gp-1/containers/fluentbit/files/fluentbit-out-elasticsearch.conf";
             string sourceFile = @"/workspaces/otel-hackathon/Arc-file-delivery-injector/Injector/files/elasticsearch_otel.conf";
 
@@ -29,9 +29,9 @@ namespace TestApp1
                     conn.Open();
 
                     // Open Symmetric Key for this session
-                    string query = @"OPEN SYMMETRIC KEY ControllerDbSymmetricKey DECRYPTION BY PASSWORD = 'c42kE28hkUZa-zt3SVPFVNjrTaIY6BGa';";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.ExecuteNonQuery();
+                    string query = @"OPEN SYMMETRIC KEY ControllerDbSymmetricKey DECRYPTION BY PASSWORD = '3cAJ0vXq-8spJ29YRj3wBL47r2DB6Ig9';";
+                    SqlCommand cmd = new SqlCommand(query, conn); // <------ CHANGE HERE
+                    cmd.ExecuteNonQuery(); 
                     
                     // - - - - - - - - - - - - - -
                     // INSERT into SQL Server

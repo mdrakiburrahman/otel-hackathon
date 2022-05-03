@@ -9,5 +9,5 @@ code -r .\Arc-file-delivery-injector\
 cd /workspaces/otel-hackathon/Arc-file-delivery-injector/Injector
 
 dotnet build
-
+dotnet run
 ```

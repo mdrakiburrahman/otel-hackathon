@@ -43,3 +43,5 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+*.crt
+Tracing-tutorial/applications-go/videos-api-netcore/src/obj/Debug/net5.0/videos-api.csprojAssemblyReference.cache
