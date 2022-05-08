@@ -1,17 +1,27 @@
 package com.microsoft.kstream;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+
+import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
+
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.Consumed;
+import org.apache.kafka.streams.kstream.Printed;
 import org.apache.kafka.streams.kstream.Materialized;
 import org.apache.kafka.streams.kstream.Produced;
 
 import java.util.Arrays;
 import java.util.Properties;
+
+import com.microsoft.kstream.model.*;
+import com.microsoft.kstream.serde.JsonSerializer;
+import com.microsoft.kstream.serde.JsonDeserializer;
+
 
 public final class KSTREAM {
 
@@ -27,7 +37,8 @@ public final class KSTREAM {
         System.out.println("➡  KSTREAM");
         System.out.println("==========================================================");
 
-        Properties props = new Properties();
+        // Kafka Properties
+        final Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, consumer_self);
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, broker);
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
@@ -35,12 +46,17 @@ public final class KSTREAM {
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         props.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, "0");
 
-        StreamsBuilder streamsBuilder = new StreamsBuilder();
-        KStream<String, String> kStream = streamsBuilder.stream(topic);
-        kStream.foreach((k, v) -> System.out.println("\nKey: " + k + "\nValue: " + v));
+        // Stream Builder
+        final StreamsBuilder streamsBuilder = new StreamsBuilder();
 
-        Topology topology = streamsBuilder.build();
-        KafkaStreams streams = new KafkaStreams(topology, props);
+        // SERDE from our POJO
+        final Serde<ResourceLog> resourceLogSerde = Serdes.serdeFrom(new JsonSerializer<>(),
+                                                               new JsonDeserializer<>(ResourceLog.class));
+
+        final KStream<Long, ResourceLog> resourceLog = streamsBuilder.stream(topic, Consumed.with(Serdes.Long(), resourceLogSerde));        
+        resourceLog.print(Printed.toSysOut());
+
+        final KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
         System.out.println("➡  STARTING STREAM...");
         streams.start();
 

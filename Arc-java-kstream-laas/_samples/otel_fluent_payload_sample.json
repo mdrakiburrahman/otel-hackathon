@@ -7,9 +7,9 @@
                 "scope": {},
                 "logRecords": [
                    {
-                      "timeUnixNano": "1652035626424223899",
+                      "timeUnixNano": "1652035628673128128",
                       "body": {
-                         "stringValue": "[health] 2022/05/08 18:47:06 [DEBUG] Successfully get NextResultSet server diagnostic data on replica gpm0mi01-0"
+                         "stringValue": "[configuration-agent] 2022/05/08 18:47:08 [DEBUG] getAgReplicaConfigs query replicaRole 1 "
                       },
                       "attributes": [
                          {
@@ -33,7 +33,391 @@
                          {
                             "key": "es_process_timestamp",
                             "value": {
-                               "stringValue": "2022-05-08T18:47:06Z"
+                               "stringValue": "2022-05-08T18:47:08Z"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_namespace",
+                            "value": {
+                               "stringValue": "arc-primary"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_node_name",
+                            "value": {
+                               "stringValue": "aks-agentpool-21933339-vmss000006"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_pod_name",
+                            "value": {
+                               "stringValue": "gpm0mi01-0"
+                            }
+                         },
+                         {
+                            "key": "custom_resource_name",
+                            "value": {
+                               "stringValue": "gpm0mi01"
+                            }
+                         },
+                         {
+                            "key": "fluent.tag",
+                            "value": {
+                               "stringValue": "ha-supervisor.log"
+                            }
+                         }
+                      ],
+                      "traceId": "",
+                      "spanId": ""
+                   },
+                   {
+                      "timeUnixNano": "1652035628673130989",
+                      "body": {
+                         "stringValue": "[configuration-agent] 2022/05/08 18:47:08 [DEBUG] getAgReplicaConfigs role is REPLICA_PRIMARY"
+                      },
+                      "attributes": [
+                         {
+                            "key": "kubernetes_container_name",
+                            "value": {
+                               "stringValue": "arc-ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "file_path",
+                            "value": {
+                               "stringValue": "/var/log/arc-ha-supervisor/ha-supervisor-stdout.log"
+                            }
+                         },
+                         {
+                            "key": "service_name",
+                            "value": {
+                               "stringValue": "ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "es_process_timestamp",
+                            "value": {
+                               "stringValue": "2022-05-08T18:47:08Z"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_namespace",
+                            "value": {
+                               "stringValue": "arc-primary"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_node_name",
+                            "value": {
+                               "stringValue": "aks-agentpool-21933339-vmss000006"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_pod_name",
+                            "value": {
+                               "stringValue": "gpm0mi01-0"
+                            }
+                         },
+                         {
+                            "key": "custom_resource_name",
+                            "value": {
+                               "stringValue": "gpm0mi01"
+                            }
+                         },
+                         {
+                            "key": "fluent.tag",
+                            "value": {
+                               "stringValue": "ha-supervisor.log"
+                            }
+                         }
+                      ],
+                      "traceId": "",
+                      "spanId": ""
+                   },
+                   {
+                      "timeUnixNano": "1652035628673131704",
+                      "body": {
+                         "stringValue": "[configuration-agent] 2022/05/08 18:47:08 [DEBUG] Successfully get AG configurations from replica gpm0mi01-0 with config: configs:<key:\"gpm0mi01\" value:<ag_name:\"gpm0mi01\" replica_name:\"gpm0mi01-0\" availability_mode:SYNCHRONOUS_COMMIT replica_role:REPLICA_PRIMARY is_synchronized:true > > "
+                      },
+                      "attributes": [
+                         {
+                            "key": "kubernetes_container_name",
+                            "value": {
+                               "stringValue": "arc-ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "file_path",
+                            "value": {
+                               "stringValue": "/var/log/arc-ha-supervisor/ha-supervisor-stdout.log"
+                            }
+                         },
+                         {
+                            "key": "service_name",
+                            "value": {
+                               "stringValue": "ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "es_process_timestamp",
+                            "value": {
+                               "stringValue": "2022-05-08T18:47:08Z"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_namespace",
+                            "value": {
+                               "stringValue": "arc-primary"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_node_name",
+                            "value": {
+                               "stringValue": "aks-agentpool-21933339-vmss000006"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_pod_name",
+                            "value": {
+                               "stringValue": "gpm0mi01-0"
+                            }
+                         },
+                         {
+                            "key": "custom_resource_name",
+                            "value": {
+                               "stringValue": "gpm0mi01"
+                            }
+                         },
+                         {
+                            "key": "fluent.tag",
+                            "value": {
+                               "stringValue": "ha-supervisor.log"
+                            }
+                         }
+                      ],
+                      "traceId": "",
+                      "spanId": ""
+                   },
+                   {
+                      "timeUnixNano": "1652035628673132419",
+                      "body": {
+                         "stringValue": "[configuration-agent] 2022/05/08 18:47:08 [DEBUG] Successfully update configmap from replica gpm0mi01-0 with config: configs:<key:\"gpm0mi01\" value:<ag_name:\"gpm0mi01\" replica_name:\"gpm0mi01-0\" availability_mode:SYNCHRONOUS_COMMIT replica_role:REPLICA_PRIMARY is_synchronized:true > > "
+                      },
+                      "attributes": [
+                         {
+                            "key": "kubernetes_container_name",
+                            "value": {
+                               "stringValue": "arc-ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "file_path",
+                            "value": {
+                               "stringValue": "/var/log/arc-ha-supervisor/ha-supervisor-stdout.log"
+                            }
+                         },
+                         {
+                            "key": "service_name",
+                            "value": {
+                               "stringValue": "ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "es_process_timestamp",
+                            "value": {
+                               "stringValue": "2022-05-08T18:47:08Z"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_namespace",
+                            "value": {
+                               "stringValue": "arc-primary"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_node_name",
+                            "value": {
+                               "stringValue": "aks-agentpool-21933339-vmss000006"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_pod_name",
+                            "value": {
+                               "stringValue": "gpm0mi01-0"
+                            }
+                         },
+                         {
+                            "key": "custom_resource_name",
+                            "value": {
+                               "stringValue": "gpm0mi01"
+                            }
+                         },
+                         {
+                            "key": "fluent.tag",
+                            "value": {
+                               "stringValue": "ha-supervisor.log"
+                            }
+                         }
+                      ],
+                      "traceId": "",
+                      "spanId": ""
+                   },
+                   {
+                      "timeUnixNano": "1652035629423948764",
+                      "body": {
+                         "stringValue": "[health] 2022/05/08 18:47:09 [DEBUG] Received healthState: {true true true} from sp_server_diagnostics"
+                      },
+                      "attributes": [
+                         {
+                            "key": "kubernetes_container_name",
+                            "value": {
+                               "stringValue": "arc-ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "file_path",
+                            "value": {
+                               "stringValue": "/var/log/arc-ha-supervisor/ha-supervisor-stdout.log"
+                            }
+                         },
+                         {
+                            "key": "service_name",
+                            "value": {
+                               "stringValue": "ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "es_process_timestamp",
+                            "value": {
+                               "stringValue": "2022-05-08T18:47:09Z"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_namespace",
+                            "value": {
+                               "stringValue": "arc-primary"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_node_name",
+                            "value": {
+                               "stringValue": "aks-agentpool-21933339-vmss000006"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_pod_name",
+                            "value": {
+                               "stringValue": "gpm0mi01-0"
+                            }
+                         },
+                         {
+                            "key": "custom_resource_name",
+                            "value": {
+                               "stringValue": "gpm0mi01"
+                            }
+                         },
+                         {
+                            "key": "fluent.tag",
+                            "value": {
+                               "stringValue": "ha-supervisor.log"
+                            }
+                         }
+                      ],
+                      "traceId": "",
+                      "spanId": ""
+                   },
+                   {
+                      "timeUnixNano": "1652035629423951387",
+                      "body": {
+                         "stringValue": "[gpm0mi01-agent] 2022/05/08 18:47:09 [DEBUG] Sending health status heartbeat isServerHealthy with value of true on replica: gpm0mi01-0, group: gpm0mi01"
+                      },
+                      "attributes": [
+                         {
+                            "key": "kubernetes_container_name",
+                            "value": {
+                               "stringValue": "arc-ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "file_path",
+                            "value": {
+                               "stringValue": "/var/log/arc-ha-supervisor/ha-supervisor-stdout.log"
+                            }
+                         },
+                         {
+                            "key": "service_name",
+                            "value": {
+                               "stringValue": "ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "es_process_timestamp",
+                            "value": {
+                               "stringValue": "2022-05-08T18:47:09Z"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_namespace",
+                            "value": {
+                               "stringValue": "arc-primary"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_node_name",
+                            "value": {
+                               "stringValue": "aks-agentpool-21933339-vmss000006"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_pod_name",
+                            "value": {
+                               "stringValue": "gpm0mi01-0"
+                            }
+                         },
+                         {
+                            "key": "custom_resource_name",
+                            "value": {
+                               "stringValue": "gpm0mi01"
+                            }
+                         },
+                         {
+                            "key": "fluent.tag",
+                            "value": {
+                               "stringValue": "ha-supervisor.log"
+                            }
+                         }
+                      ],
+                      "traceId": "",
+                      "spanId": ""
+                   },
+                   {
+                      "timeUnixNano": "1652035629423952102",
+                      "body": {
+                         "stringValue": "[gpm0mi01-agent] 2022/05/08 18:47:09 [DEBUG] Sent healthy heartbeat on replica: gpm0mi01-0, group: gpm0mi01"
+                      },
+                      "attributes": [
+                         {
+                            "key": "kubernetes_container_name",
+                            "value": {
+                               "stringValue": "arc-ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "file_path",
+                            "value": {
+                               "stringValue": "/var/log/arc-ha-supervisor/ha-supervisor-stdout.log"
+                            }
+                         },
+                         {
+                            "key": "service_name",
+                            "value": {
+                               "stringValue": "ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "es_process_timestamp",
+                            "value": {
+                               "stringValue": "2022-05-08T18:47:09Z"
                             }
                          },
                          {
