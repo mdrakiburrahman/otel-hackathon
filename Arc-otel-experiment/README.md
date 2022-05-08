@@ -67,7 +67,7 @@ Open up VSCode in seperate window containing the dotnet injector
 
 ```powershell
 cd C:\Users\mdrrahman\Documents\GitHub\otel-hackathon
-code -r Arc-file-delivery-injector
+code -r Arc-dotnet-file-delivery-injector
 ```
 > Make sure to localize to IP of Controller DB and Password and encryptionKey in `devcontainer.env`
 
@@ -154,3 +154,4 @@ cat /run/fluentbit/fluentbit-out-elasticsearch.conf
 tail -f /var/log/fluentbit/fluentbit.log -n +1
 ```
 
+### KStream Container
