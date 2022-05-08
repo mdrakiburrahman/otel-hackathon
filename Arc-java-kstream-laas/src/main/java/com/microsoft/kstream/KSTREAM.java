@@ -56,8 +56,23 @@ public final class KSTREAM {
         // Print to console
         otlp.print(Printed.toSysOut());
 
-        // Write to RAW topic
+        // Write as is to RAW topic
         otlp.to("dbaas.raw", Produced.with(Serdes.String(), otlpSerde));
+
+        // Write to dbaas.flat topic
+
+        final Serde<Body> bodySerde = Serdes.serdeFrom(new JsonSerializer<>(),
+                                                               new JsonDeserializer<>(Body.class));
+
+        // Get resourceLogs.scopeLogs.logRecords and write to dbaas.flat
+        otlp.mapValues(value -> value.getResourceLogs())
+            .flatMapValues(value -> value)
+            .mapValues(value -> value.getScopeLogs())
+            .flatMapValues(value -> value)
+            .mapValues(value -> value.getLogRecords())
+            .flatMapValues(value -> value)
+            .mapValues(value -> value.getBody())
+            .to("dbaas.flat", Produced.with(Serdes.String(), bodySerde));
 
         final KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
         System.out.println("➡  STARTING STREAM...");
