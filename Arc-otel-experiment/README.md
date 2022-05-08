@@ -1,11 +1,11 @@
 # Setup
 
-## AKS
+## Environment: Arc Indirect on AKS
 
 > **Pre-req**: Have an Arc Data Indirect/Direct cluster that has an MI deployed
 
-### Artifact setup
-Get kubeconfig from Azure:
+### Get kubeconfig from Azure
+
 ```bash
 # Login as service principal
 az login --service-principal --username $spnClientId --password $spnClientSecret --tenant $spnTenantId
@@ -19,7 +19,8 @@ kubectl get nodes
 export ns=arc-primary
 ```
 
-Grab secrets necessary for OTEL work:
+### Grab Arc secrets necessary for OTEL work
+
 ```bash
 # Get Secrets
 kubectl get secret controller-db-rw-secret -n $ns -o json | jq -r '.data.password' | base64 -d
@@ -47,6 +48,7 @@ spec:
     targetPort: 1433
 EOF
 ```
+
 Summary:
 | Tech | Endpoint              | Credentials                                        | Encryption Password              |
 | ---- | --------------------- | -------------------------------------------------- | -------------------------------- |
@@ -61,7 +63,7 @@ chmod +x /workspaces/otel-hackathon/Arc-otel-experiment/scripts/pull-certs-into-
 # configmap/otel-cluster-config created
 ```
 
-Inject OTEL config into Controller File Delivery Table:
+### Dotnet Container: Inject OTEL config into Controller File Delivery Table
 
 Open up VSCode in seperate window containing the dotnet injector
 
@@ -77,7 +79,9 @@ dotnet clean
 dotnet build
 dotnet run
 ```
+
 The script updates the following entry in the FSM - corresponding to the single fluentbit container's conf file that controls fluentbit behavior in the MI:
+
 ```sql
 USE Controller;
 OPEN SYMMETRIC KEY ControllerDbSymmetricKey DECRYPTION BY PASSWORD = 'HnUnfSCkkCtMeRZbN3AQvgIDyTVNBSVl';
@@ -154,4 +158,9 @@ cat /run/fluentbit/fluentbit-out-elasticsearch.conf
 tail -f /var/log/fluentbit/fluentbit.log -n +1
 ```
 
-### KStream Container
+### Java Container: KStream Processing
+
+```powershell
+cd C:\Users\mdrrahman\Documents\GitHub\otel-hackathon
+code -r Arc-java-kstream-laas
+```
