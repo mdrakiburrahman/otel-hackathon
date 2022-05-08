@@ -1,0 +1,78 @@
+{
+    "resourceLogs": [
+       {
+          "resource": {},
+          "scopeLogs": [
+             {
+                "scope": {},
+                "logRecords": [
+                   {
+                      "timeUnixNano": "1652035626424223899",
+                      "body": {
+                         "stringValue": "[health] 2022/05/08 18:47:06 [DEBUG] Successfully get NextResultSet server diagnostic data on replica gpm0mi01-0"
+                      },
+                      "attributes": [
+                         {
+                            "key": "kubernetes_container_name",
+                            "value": {
+                               "stringValue": "arc-ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "file_path",
+                            "value": {
+                               "stringValue": "/var/log/arc-ha-supervisor/ha-supervisor-stdout.log"
+                            }
+                         },
+                         {
+                            "key": "service_name",
+                            "value": {
+                               "stringValue": "ha-supervisor"
+                            }
+                         },
+                         {
+                            "key": "es_process_timestamp",
+                            "value": {
+                               "stringValue": "2022-05-08T18:47:06Z"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_namespace",
+                            "value": {
+                               "stringValue": "arc-primary"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_node_name",
+                            "value": {
+                               "stringValue": "aks-agentpool-21933339-vmss000006"
+                            }
+                         },
+                         {
+                            "key": "kubernetes_pod_name",
+                            "value": {
+                               "stringValue": "gpm0mi01-0"
+                            }
+                         },
+                         {
+                            "key": "custom_resource_name",
+                            "value": {
+                               "stringValue": "gpm0mi01"
+                            }
+                         },
+                         {
+                            "key": "fluent.tag",
+                            "value": {
+                               "stringValue": "ha-supervisor.log"
+                            }
+                         }
+                      ],
+                      "traceId": "",
+                      "spanId": ""
+                   }
+                ]
+             }
+          ]
+       }
+    ]
+ }

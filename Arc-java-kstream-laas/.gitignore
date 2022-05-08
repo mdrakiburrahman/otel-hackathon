@@ -23,3 +23,6 @@
 hs_err_pid*
 /kafka-streams-word-count.iml
 /.idea/
+
+# Build
+target/*
