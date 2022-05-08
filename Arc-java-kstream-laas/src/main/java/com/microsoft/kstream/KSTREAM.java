@@ -16,15 +16,28 @@ import java.util.Properties;
 public final class KSTREAM {
 
     public static void main(String[] args) {
+        // = = = = = = = = = = =
+        // Environment Variables
+        // = = = = = = = = = = =
+        final var topic = System.getenv("KAFKA_TOPIC");
+        final var broker = System.getenv("KAFKA_BROKER_ADDRESS");
+        final var consumer_self = System.getenv("KAFKA_CONSUMER_NAME_SELF");
+
         System.out.println("\n==========================================================");
         System.out.println("➡  KSTREAM");
         System.out.println("==========================================================");
 
-        Properties props = getConfig();
+        Properties props = new Properties();
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG, consumer_self);
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, broker);
+        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        props.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, "0");
 
         StreamsBuilder streamsBuilder = new StreamsBuilder();
-        KStream<Integer, String> kStream = streamsBuilder.stream("otel.fluent");
-        kStream.foreach((k, v) -> System.out.println(k + ": " + v));
+        KStream<String, String> kStream = streamsBuilder.stream(topic);
+        kStream.foreach((k, v) -> System.out.println("\nKey: " + k + "\nValue: " + v));
 
         Topology topology = streamsBuilder.build();
         KafkaStreams streams = new KafkaStreams(topology, props);
@@ -40,16 +53,5 @@ public final class KSTREAM {
         System.out.println("\n==========================================================");
         System.out.println("➡  STARTED");
         System.out.println("==========================================================");
-    }
-
-    private static Properties getConfig() {
-        Properties props = new Properties();
-        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-laas");
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "52.226.243.196:9092");
-        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        props.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, "0");
-        return props;
     }
 }

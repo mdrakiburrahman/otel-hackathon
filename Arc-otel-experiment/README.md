@@ -108,6 +108,15 @@ kubectl apply -f /workspaces/otel-hackathon/Arc-otel-experiment/kubernetes-kafka
 # service/kafdrop-ui created
 # service/zookeeper-1 created
 # service/kafka-service created
+
+# Hack for KStream demo
+kubectl get svc -n laas | grep kafka-service
+# kafka-service   LoadBalancer   192.168.92.239   52.226.243.196   9092:31440/TCP                  7m49s
+
+# Go back into kubernetes-kafka-elastic-laas.yml and in the Kafka Deployment, set:
+# env:
+#   - name: ADVERTISED_HOST_NAME
+#   value: 52.226.243.196 # <- This is a hack to get things to work externally without DNS
 ```
 
 ### OTEL setup
@@ -159,13 +168,21 @@ tail -f /var/log/fluentbit/fluentbit.log -n +1
 ```
 
 ### Java Container: KStream Processing
-
 ```powershell
 cd C:\Users\mdrrahman\Documents\GitHub\otel-hackathon
 code -r Arc-java-kstream-laas
 ```
 Inside the container:
 ```bash
+# Set environment variables in devcontainer.env, specially the Broker Public IP Address
+
 # Build and run package
 clear && mvn clean install && java -jar target/kstream-arc-1.0-SNAPSHOT.jar
+```
+
+Open up Kubernetes Dashboard in this container:
+```bash
+kubectl proxy
+# http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/workloads?namespace=default
+# Point to kubeconfig
 ```
