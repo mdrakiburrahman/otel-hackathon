@@ -119,5 +119,38 @@ Reboot SQL MI to fire Fluentbit up:
 ```bash
 kubectl delete pod gpm0mi01-0 -n arc-primary --grace-period=0 --force
 ```
-Tail fluentbit in case something breaks.
+Tail fluentbit in case something breaks:
+```bash
+# The file we pushed via FSM
+cat /run/fluentbit/fluentbit-out-elasticsearch.conf
+# ###############################
+# # Elasticsearch - original
+# ###############################
+# [OUTPUT]
+#     Name             es
+#     Match            *
+#     Host             ${FLUENT_ELASTICSEARCH_HOST}
+#     Port             ${FLUENT_ELASTICSEARCH_PORT}
+#     Logstash_Format  On
+#     Retry_Limit      False
+#     tls              On
+#     tls.verify       On
+#     tls.ca_file      /var/run/configmaps/cluster/cluster-ca-certificate.crt
+#     tls.crt_file     /var/run/secrets/managed/certificates/fluentbit/fluentbit-certificate.pem
+#     tls.key_file     /var/run/secrets/managed/certificates/fluentbit/fluentbit-privatekey.pem
+
+# ###############################
+# # OTEL - laas
+# ###############################
+# [OUTPUT]
+#     Name                  Forward
+#     Match                 *
+#     Host                  otel-collector.arc-primary.svc.cluster.local
+#     Port                  8006
+#     Require_ack_response  True
+#     tls                   Off
+
+# Fluentbit logs
+tail -f /var/log/fluentbit/fluentbit.log -n +1
+```
 
