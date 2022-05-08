@@ -89,8 +89,11 @@ spec:
           ports:
             - containerPort: 9092
           env:
+            # https://github.com/debezium/docker-images/blob/main/connect-base/0.3/README.md#environment-variables
             - name: ZOOKEEPER_CONNECT
               value: zookeeper-1:2181
+            - name: ADVERTISED_HOST_NAME
+              value: 52.226.243.196 # <- This is a hack to get things to work externally without DNS
 ---
 kind: Deployment
 apiVersion: apps/v1
@@ -164,8 +167,10 @@ metadata:
     name: kafka
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Local
   ports:
     - port: 9092
+      targetPort: 9092
       name: kafka-port
       protocol: TCP
   selector:
