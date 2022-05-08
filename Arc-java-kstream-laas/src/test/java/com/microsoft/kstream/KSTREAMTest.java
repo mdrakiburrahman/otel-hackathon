@@ -4,9 +4,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-public class WordCountAppTest
+public class KSTREAMTest
 {
-    public WordCountAppTest() {
+    public KSTREAMTest() {
     }
 
     @Test

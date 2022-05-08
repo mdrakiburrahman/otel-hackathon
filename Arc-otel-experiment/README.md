@@ -164,3 +164,8 @@ tail -f /var/log/fluentbit/fluentbit.log -n +1
 cd C:\Users\mdrrahman\Documents\GitHub\otel-hackathon
 code -r Arc-java-kstream-laas
 ```
+Inside the container:
+```bash
+# Build and run package
+clear && mvn clean install && java -jar target/kstream-arc-1.0-SNAPSHOT.jar
+```

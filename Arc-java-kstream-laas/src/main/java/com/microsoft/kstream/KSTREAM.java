@@ -23,30 +23,18 @@ public final class KSTREAM {
         Properties props = getConfig();
 
         StreamsBuilder streamsBuilder = new StreamsBuilder();
-        // Build the Topology
-        streamsBuilder.<String, String>stream("sentences") // <- Input Topic
-                .flatMapValues((key, value) ->
-                        Arrays.asList(value.toLowerCase()
-                            .split(" ")))
-                .groupBy((key, value) -> value)
-                .count(Materialized.with(Serdes.String(), Serdes.Long()))
-                .toStream()
-                .to("word-count", Produced.with(Serdes.String(), Serdes.Long())); // <- Output Topic
-        
-        // Print to stdout
-        streamsBuilder.stream("sentences")
-                .foreach((key, value) -> System.out.println(key + ": " + value));
+        KStream<Integer, String> kStream = streamsBuilder.stream("otel.fluent");
+        kStream.foreach((k, v) -> System.out.println(k + ": " + v));
 
-        // Create the Kafka Streams Application
-        KafkaStreams kafkaStreams = new KafkaStreams(streamsBuilder.build(), props);
-        // Start the application
+        Topology topology = streamsBuilder.build();
+        KafkaStreams streams = new KafkaStreams(topology, props);
         System.out.println("➡  STARTING STREAM...");
-        kafkaStreams.start();
+        streams.start();
 
-        // attach shutdown handler to catch control-c
+        // Attach shutdown handler to catch control-c
         Runtime.getRuntime().addShutdownHook(new Thread( () -> {
             System.out.println("➡  STOPPING STREAM...");
-            kafkaStreams.close();
+            streams.close();
         }));
 
         System.out.println("\n==========================================================");
@@ -56,8 +44,8 @@ public final class KSTREAM {
 
     private static Properties getConfig() {
         Properties props = new Properties();
-        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "word-count-app");
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9092");
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream-laas");
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "20.84.14.72:9092");
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
