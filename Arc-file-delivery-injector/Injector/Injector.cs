@@ -10,8 +10,15 @@ namespace TestApp1
     {
         static void Main(string[] args)
         {
-            string connString = @"Server = 172.28.113.204; Database = controller; User ID = controldb-rw-user; Password = V2PtzVq9iW8pnJ-qi33GRqw8aumYmxPV;"; // <------ CHANGE HERE
-            string targetFile = @"/config/namespaces/arc/scaledsets/sql-gp-1/containers/fluentbit/files/fluentbit-out-elasticsearch.conf";
+            // Read environment variables
+            string controllerIP = Environment.GetEnvironmentVariable("CONTROLLER_IP");
+            string controllerPassword = Environment.GetEnvironmentVariable("CONTROLLER_PASSWORD");
+            string controllerKey = Environment.GetEnvironmentVariable("CONTROLLER_ENCRYPTIONKEY");
+            string miCR=Environment.GetEnvironmentVariable("MI_NAME");
+            string arcNamespace=Environment.GetEnvironmentVariable("ARC_NAMESPACE");
+
+            string connString = $@"Server = {controllerIP}; Database = controller; User ID = controldb-rw-user; Password = {controllerPassword};";
+            string targetFile = $@"/config/namespaces/{arcNamespace}/scaledsets/{miCR}/containers/fluentbit/files/fluentbit-out-elasticsearch.conf";
             string sourceFile = @"/workspaces/otel-hackathon/Arc-file-delivery-injector/Injector/files/elasticsearch_otel.conf";
 
             // Read in text file from drive
@@ -22,15 +29,12 @@ namespace TestApp1
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    // variables
                     SqlDataReader dr;
-
-                    // Open connection
                     conn.Open();
 
                     // Open Symmetric Key for this session
-                    string query = @"OPEN SYMMETRIC KEY ControllerDbSymmetricKey DECRYPTION BY PASSWORD = '3cAJ0vXq-8spJ29YRj3wBL47r2DB6Ig9';";
-                    SqlCommand cmd = new SqlCommand(query, conn); // <------ CHANGE HERE
+                    string query = $@"OPEN SYMMETRIC KEY ControllerDbSymmetricKey DECRYPTION BY PASSWORD = '{controllerKey}';";
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.ExecuteNonQuery(); 
                     
                     // - - - - - - - - - - - - - -

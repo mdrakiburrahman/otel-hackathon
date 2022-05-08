@@ -5,7 +5,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: elk
-  namespace: rbc
+  namespace: laas
 spec:
   selector:
     matchLabels:
@@ -26,7 +26,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: elk-service
-  namespace: rbc
+  namespace: laas
   labels:
     name: elk-1
 spec:
@@ -50,7 +50,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: zookeeper-1
-  namespace: rbc
+  namespace: laas
 spec:
   selector:
     matchLabels:
@@ -72,7 +72,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: kafka-1
-  namespace: rbc
+  namespace: laas
 spec:
   selector:
     matchLabels:
@@ -96,7 +96,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: kafdrop-1
-  namespace: rbc
+  namespace: laas
 spec:
   selector:
     matchLabels:
@@ -122,7 +122,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kafdrop-ui
-  namespace: rbc
+  namespace: laas
   labels:
     app: kafdrop
 spec:
@@ -138,7 +138,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: zookeeper-1
-  namespace: rbc
+  namespace: laas
   labels:
     app: zookeeper-1
 spec:
@@ -159,7 +159,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kafka-service
-  namespace: rbc
+  namespace: laas
   labels:
     name: kafka
 spec:

@@ -5,6 +5,7 @@ jaas.conf
 certificates/*
 *.env
 env/*
+.devcontainer/devcontainer.env
 
 *.swp
 *.*~
