@@ -1,13 +1,15 @@
 
 package com.microsoft.kstream.model;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Generated("jsonschema2pojo")
-public class ScopeLog {
+public class ScopeLog implements Serializable
+{
 
     @SerializedName("scope")
     @Expose
@@ -15,6 +17,7 @@ public class ScopeLog {
     @SerializedName("logRecords")
     @Expose
     private List<LogRecord> logRecords = null;
+    private final static long serialVersionUID = -7763921848041725878L;
 
     public Scope getScope() {
         return scope;
@@ -30,6 +33,26 @@ public class ScopeLog {
 
     public void setLogRecords(List<LogRecord> logRecords) {
         this.logRecords = logRecords;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ScopeLog.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append("scope");
+        sb.append('=');
+        sb.append(((this.scope == null)?"<null>":this.scope));
+        sb.append(',');
+        sb.append("logRecords");
+        sb.append('=');
+        sb.append(((this.logRecords == null)?"<null>":this.logRecords));
+        sb.append(',');
+        if (sb.charAt((sb.length()- 1)) == ',') {
+            sb.setCharAt((sb.length()- 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
     }
 
 }

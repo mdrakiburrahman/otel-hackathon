@@ -41,20 +41,23 @@ public final class KSTREAM {
         final Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, consumer_self);
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, broker);
-        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         props.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, "0");
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         // Stream Builder
         final StreamsBuilder streamsBuilder = new StreamsBuilder();
 
-        // SERDE from our POJO
-        final Serde<ResourceLog> resourceLogSerde = Serdes.serdeFrom(new JsonSerializer<>(),
-                                                               new JsonDeserializer<>(ResourceLog.class));
+        // Generate a SERDE from our JSON POJO
+        final Serde<OtlpJSON> otlpSerde = Serdes.serdeFrom(new JsonSerializer<>(),
+                                                               new JsonDeserializer<>(OtlpJSON.class));
 
-        final KStream<Long, ResourceLog> resourceLog = streamsBuilder.stream(topic, Consumed.with(Serdes.Long(), resourceLogSerde));        
-        resourceLog.print(Printed.toSysOut());
+        final KStream<String, OtlpJSON> otlp = streamsBuilder.stream(topic, Consumed.with(Serdes.String(), otlpSerde));        
+
+        // Print to console
+        otlp.print(Printed.toSysOut());
+
+        // Write to RAW topic
+        otlp.to("dbaas.raw", Produced.with(Serdes.String(), otlpSerde));
 
         final KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
         System.out.println("➡  STARTING STREAM...");
