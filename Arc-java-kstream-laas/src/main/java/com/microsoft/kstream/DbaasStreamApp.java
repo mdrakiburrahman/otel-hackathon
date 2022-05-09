@@ -29,8 +29,8 @@ public class DbaasStreamApp {
 
         // 1. Create stream configuration
         Properties props = new Properties();
-        props.put(StreamsConfig.APPLICATION_ID_CONFIG, FanOutConfigs.applicationID);
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, FanOutConfigs.broker);
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG, KafkaConfigs.applicationID);
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConfigs.broker);
 
         // 2. Stream Builder
         StreamsBuilder builder = new StreamsBuilder();
@@ -40,24 +40,13 @@ public class DbaasStreamApp {
         Serde<LaasJSON> dbaasSerde = Serdes.serdeFrom(new JsonSerializer<>(), new JsonDeserializer<>(LaasJSON.class));
 
         // 4. Create KStream with DbaaS Serdes
-        KStream<String, OtlpJSON> KS0 = builder.stream(FanOutConfigs.arcTopic, Consumed.with(Serdes.String(), otlpSerde));
+        KStream<String, OtlpJSON> KS0 = builder.stream(KafkaConfigs.arcTopic, Consumed.with(Serdes.String(), otlpSerde));
+        
+        // 5. Transform to DbaaS Topic
+        KStream<String, LaasJSON> KS1 = KS0.flatMapValues(otlp -> RecordBuilder.getDbaasRecords(otlp));
+        KS1.print(Printed.toSysOut());
 
-        // 5. Process Stream
-        // Print as-is to console
-        KS0.print(Printed.toSysOut());
-
-        // Write as is to RAW topic
-        KS0.to(FanOutConfigs.dbaasStandardTopic, Produced.with(Serdes.String(), otlpSerde));
-
-        // Get resourceLogs.scopeLogs.logRecords.body.stringValue and write to dbaas.flat
-        KS0.mapValues(value -> value.getResourceLogs())
-            .flatMapValues(value -> value)
-            .mapValues(value -> value.getScopeLogs())
-            .flatMapValues(value -> value)
-            .mapValues(value -> value.getLogRecords())
-            .flatMapValues(value -> value)
-            .mapValues(value -> value.getBody().getStringValue())
-            .to("dbaas.flat", Produced.with(Serdes.String(), Serdes.String()));
+        KS1.to(KafkaConfigs.dbaasStandardTopic, Produced.with(Serdes.String(), dbaasSerde));
 
         // 6. Create Topology and create Stream
         Topology dbaasTopology = builder.build();

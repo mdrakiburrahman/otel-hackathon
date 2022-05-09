@@ -45,7 +45,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.microsoft.kstream.KSTREAM</mainClass>
+              <mainClass>com.microsoft.kstream.DbaasStreamApp</mainClass>
             </manifest>
           </archive>
         </configuration>

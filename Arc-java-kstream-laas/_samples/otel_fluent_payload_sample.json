@@ -1,3 +1,4 @@
+
 {
    "resourceLogs": [
       {
@@ -7,33 +8,45 @@
                "scope": {},
                "logRecords": [
                   {
-                     "timeUnixNano": "1652048755173575401",
+                     "timeUnixNano": "1652102878323999881",
                      "body": {
-                        "stringValue": "2022-05-08 22:25:55.1527|INFO|Microsoft.Azure.Hybrid.Sql.Schedule.ScheduleRunner|Heartbeat at 05/08/2022 22:25:55."
+                        "stringValue": "spawned: 'ha-supervisor' with pid 690"
                      },
                      "attributes": [
                         {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/arc-sqlmi/mssql-miaa-agent-stdout.log"
-                           }
-                        },
-                        {
                            "key": "service_name",
                            "value": {
-                              "stringValue": "mssql-miaa-agent"
+                              "stringValue": "supervisord"
                            }
                         },
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:10Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "fluentbit"
+                           }
+                        },
+                        {
+                           "key": "log_level",
+                           "value": {
+                              "stringValue": "INFO"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/supervisor/supervisord.log"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:27:58,324"
                            }
                         },
                         {
@@ -45,7 +58,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -63,7 +76,7 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql-miaa-agent.log"
+                              "stringValue": "supervisord.log"
                            }
                         }
                      ],
@@ -71,33 +84,45 @@
                      "spanId": ""
                   },
                   {
-                     "timeUnixNano": "1652048755173576116",
+                     "timeUnixNano": "1652102882265000104",
                      "body": {
-                        "stringValue": "2022-05-08 22:25:55.1527|INFO|Microsoft.Azure.Hybrid.Sql.Schedule.ScheduleRunner|SQL managed instance role: Primary."
+                        "stringValue": "received SIGCHLD indicating a child quit"
                      },
                      "attributes": [
                         {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/arc-sqlmi/mssql-miaa-agent-stdout.log"
-                           }
-                        },
-                        {
                            "key": "service_name",
                            "value": {
-                              "stringValue": "mssql-miaa-agent"
+                              "stringValue": "supervisord"
                            }
                         },
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:10Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "fluentbit"
+                           }
+                        },
+                        {
+                           "key": "log_level",
+                           "value": {
+                              "stringValue": "DEBG"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/supervisor/supervisord.log"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:02,265"
                            }
                         },
                         {
@@ -109,7 +134,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -127,7 +152,7 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql-miaa-agent.log"
+                              "stringValue": "supervisord.log"
                            }
                         }
                      ],
@@ -135,33 +160,45 @@
                      "spanId": ""
                   },
                   {
-                     "timeUnixNano": "1652048755173576593",
+                     "timeUnixNano": "1652102883354000091",
                      "body": {
-                        "stringValue": "2022-05-08 22:25:55.1527|INFO|Microsoft.Azure.Hybrid.Sql.Schedule.ScheduleRunner|Found schedules that are due. Now: 05/08/2022 22:25:55."
+                        "stringValue": "spawned: 'collectd' with pid 691"
                      },
                      "attributes": [
                         {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/arc-sqlmi/mssql-miaa-agent-stdout.log"
-                           }
-                        },
-                        {
                            "key": "service_name",
                            "value": {
-                              "stringValue": "mssql-miaa-agent"
+                              "stringValue": "supervisord"
                            }
                         },
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:10Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "fluentbit"
+                           }
+                        },
+                        {
+                           "key": "log_level",
+                           "value": {
+                              "stringValue": "INFO"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/supervisor/supervisord.log"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:03,354"
                            }
                         },
                         {
@@ -173,7 +210,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -191,7 +228,7 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql-miaa-agent.log"
+                              "stringValue": "supervisord.log"
                            }
                         }
                      ],
@@ -199,33 +236,45 @@
                      "spanId": ""
                   },
                   {
-                     "timeUnixNano": "1652048755173576831",
+                     "timeUnixNano": "1652102886946000099",
                      "body": {
-                        "stringValue": "2022-05-08 22:25:55.1601|DEBUG|Microsoft.Azure.Hybrid.Sql.Schedule.ContainerPromotionSchedule|The temp container does not contain completed backup files. Not eligible for promoting to current."
+                        "stringValue": "spawned: 'supercronic' with pid 702"
                      },
                      "attributes": [
                         {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/arc-sqlmi/mssql-miaa-agent-stdout.log"
-                           }
-                        },
-                        {
                            "key": "service_name",
                            "value": {
-                              "stringValue": "mssql-miaa-agent"
+                              "stringValue": "supervisord"
                            }
                         },
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:10Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "fluentbit"
+                           }
+                        },
+                        {
+                           "key": "log_level",
+                           "value": {
+                              "stringValue": "INFO"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/supervisor/supervisord.log"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:06,946"
                            }
                         },
                         {
@@ -237,7 +286,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -255,199 +304,7 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql-miaa-agent.log"
-                           }
-                        }
-                     ],
-                     "traceId": "",
-                     "spanId": ""
-                  },
-                  {
-                     "timeUnixNano": "1652048755173577308",
-                     "body": {
-                        "stringValue": "2022-05-08 22:25:55.1601|INFO|Microsoft.Azure.Hybrid.Sql.Schedule.ScheduleRunner|Executing schedule result: False."
-                     },
-                     "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/arc-sqlmi/mssql-miaa-agent-stdout.log"
-                           }
-                        },
-                        {
-                           "key": "service_name",
-                           "value": {
-                              "stringValue": "mssql-miaa-agent"
-                           }
-                        },
-                        {
-                           "key": "es_process_timestamp",
-                           "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_namespace",
-                           "value": {
-                              "stringValue": "arc-primary"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_node_name",
-                           "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_pod_name",
-                           "value": {
-                              "stringValue": "gpm0mi01-0"
-                           }
-                        },
-                        {
-                           "key": "custom_resource_name",
-                           "value": {
-                              "stringValue": "gpm0mi01"
-                           }
-                        },
-                        {
-                           "key": "fluent.tag",
-                           "value": {
-                              "stringValue": "mssql-miaa-agent.log"
-                           }
-                        }
-                     ],
-                     "traceId": "",
-                     "spanId": ""
-                  },
-                  {
-                     "timeUnixNano": "1652048755173577785",
-                     "body": {
-                        "stringValue": "2022-05-08 22:25:55.1641|DEBUG|Microsoft.Azure.Hybrid.Sql.Schedule.ContainerPromotionSchedule|The temp container does not contain completed backup files. Not eligible for promoting to current."
-                     },
-                     "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/arc-sqlmi/mssql-miaa-agent-stdout.log"
-                           }
-                        },
-                        {
-                           "key": "service_name",
-                           "value": {
-                              "stringValue": "mssql-miaa-agent"
-                           }
-                        },
-                        {
-                           "key": "es_process_timestamp",
-                           "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_namespace",
-                           "value": {
-                              "stringValue": "arc-primary"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_node_name",
-                           "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_pod_name",
-                           "value": {
-                              "stringValue": "gpm0mi01-0"
-                           }
-                        },
-                        {
-                           "key": "custom_resource_name",
-                           "value": {
-                              "stringValue": "gpm0mi01"
-                           }
-                        },
-                        {
-                           "key": "fluent.tag",
-                           "value": {
-                              "stringValue": "mssql-miaa-agent.log"
-                           }
-                        }
-                     ],
-                     "traceId": "",
-                     "spanId": ""
-                  },
-                  {
-                     "timeUnixNano": "1652048755173578023",
-                     "body": {
-                        "stringValue": "2022-05-08 22:25:55.1641|INFO|Microsoft.Azure.Hybrid.Sql.Schedule.ScheduleRunner|Executing schedule result: False."
-                     },
-                     "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/arc-sqlmi/mssql-miaa-agent-stdout.log"
-                           }
-                        },
-                        {
-                           "key": "service_name",
-                           "value": {
-                              "stringValue": "mssql-miaa-agent"
-                           }
-                        },
-                        {
-                           "key": "es_process_timestamp",
-                           "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_namespace",
-                           "value": {
-                              "stringValue": "arc-primary"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_node_name",
-                           "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_pod_name",
-                           "value": {
-                              "stringValue": "gpm0mi01-0"
-                           }
-                        },
-                        {
-                           "key": "custom_resource_name",
-                           "value": {
-                              "stringValue": "gpm0mi01"
-                           }
-                        },
-                        {
-                           "key": "fluent.tag",
-                           "value": {
-                              "stringValue": "mssql-miaa-agent.log"
+                              "stringValue": "supervisord.log"
                            }
                         }
                      ],
@@ -465,215 +322,11 @@
                "scope": {},
                "logRecords": [
                   {
-                     "timeUnixNano": "1652048755173482418",
+                     "timeUnixNano": "1652102889591329097",
                      "body": {
-                        "stringValue": "[health] 2022/05/08 22:25:55 [DEBUG] Received healthState: {true true true} from sp_server_diagnostics"
+                        "stringValue": "\r2022-05-09 13:28:09.65 spid19s     [32761]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 0. CleanupUnderUserTransaction: 0. TranLevelPVS: 0"
                      },
                      "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-ha-supervisor"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/arc-ha-supervisor/ha-supervisor-stdout.log"
-                           }
-                        },
-                        {
-                           "key": "service_name",
-                           "value": {
-                              "stringValue": "ha-supervisor"
-                           }
-                        },
-                        {
-                           "key": "es_process_timestamp",
-                           "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_namespace",
-                           "value": {
-                              "stringValue": "arc-primary"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_node_name",
-                           "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_pod_name",
-                           "value": {
-                              "stringValue": "gpm0mi01-0"
-                           }
-                        },
-                        {
-                           "key": "custom_resource_name",
-                           "value": {
-                              "stringValue": "gpm0mi01"
-                           }
-                        },
-                        {
-                           "key": "fluent.tag",
-                           "value": {
-                              "stringValue": "ha-supervisor.log"
-                           }
-                        }
-                     ],
-                     "traceId": "",
-                     "spanId": ""
-                  },
-                  {
-                     "timeUnixNano": "1652048755173483371",
-                     "body": {
-                        "stringValue": "[gpm0mi01-agent] 2022/05/08 22:25:55 [DEBUG] Sending health status heartbeat isServerHealthy with value of true on replica: gpm0mi01-0, group: gpm0mi01"
-                     },
-                     "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-ha-supervisor"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/arc-ha-supervisor/ha-supervisor-stdout.log"
-                           }
-                        },
-                        {
-                           "key": "service_name",
-                           "value": {
-                              "stringValue": "ha-supervisor"
-                           }
-                        },
-                        {
-                           "key": "es_process_timestamp",
-                           "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_namespace",
-                           "value": {
-                              "stringValue": "arc-primary"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_node_name",
-                           "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_pod_name",
-                           "value": {
-                              "stringValue": "gpm0mi01-0"
-                           }
-                        },
-                        {
-                           "key": "custom_resource_name",
-                           "value": {
-                              "stringValue": "gpm0mi01"
-                           }
-                        },
-                        {
-                           "key": "fluent.tag",
-                           "value": {
-                              "stringValue": "ha-supervisor.log"
-                           }
-                        }
-                     ],
-                     "traceId": "",
-                     "spanId": ""
-                  },
-                  {
-                     "timeUnixNano": "1652048755173484086",
-                     "body": {
-                        "stringValue": "[gpm0mi01-agent] 2022/05/08 22:25:55 [DEBUG] Sent healthy heartbeat on replica: gpm0mi01-0, group: gpm0mi01"
-                     },
-                     "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-ha-supervisor"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/arc-ha-supervisor/ha-supervisor-stdout.log"
-                           }
-                        },
-                        {
-                           "key": "service_name",
-                           "value": {
-                              "stringValue": "ha-supervisor"
-                           }
-                        },
-                        {
-                           "key": "es_process_timestamp",
-                           "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_namespace",
-                           "value": {
-                              "stringValue": "arc-primary"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_node_name",
-                           "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
-                           }
-                        },
-                        {
-                           "key": "kubernetes_pod_name",
-                           "value": {
-                              "stringValue": "gpm0mi01-0"
-                           }
-                        },
-                        {
-                           "key": "custom_resource_name",
-                           "value": {
-                              "stringValue": "gpm0mi01"
-                           }
-                        },
-                        {
-                           "key": "fluent.tag",
-                           "value": {
-                              "stringValue": "ha-supervisor.log"
-                           }
-                        }
-                     ],
-                     "traceId": "",
-                     "spanId": ""
-                  },
-                  {
-                     "timeUnixNano": "1652048755173206806",
-                     "body": {
-                        "stringValue": "2022-05-08 22:25:55.1527|INFO|Microsoft.Azure.Hybrid.Sql.Schedule.ScheduleRunner|Heartbeat at 05/08/2022 22:25:55."
-                     },
-                     "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/mssql/miaa-agent-2022-05-08.log"
-                           }
-                        },
                         {
                            "key": "service_name",
                            "value": {
@@ -683,7 +336,19 @@
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/arc-sqlmi/mssql-server-stdout.log"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
                            }
                         },
                         {
@@ -695,7 +360,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -713,7 +378,7 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql_log.log"
+                              "stringValue": "mssql-server-supervisor.log"
                            }
                         }
                      ],
@@ -721,23 +386,11 @@
                      "spanId": ""
                   },
                   {
-                     "timeUnixNano": "1652048755173209905",
+                     "timeUnixNano": "1652102889591331958",
                      "body": {
-                        "stringValue": "2022-05-08 22:25:55.1527|INFO|Microsoft.Azure.Hybrid.Sql.Schedule.ScheduleRunner|SQL managed instance role: Primary."
+                        "stringValue": "\r2022-05-09 13:28:09.66 spid19s     Starting up database 'model_msdb'."
                      },
                      "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/mssql/miaa-agent-2022-05-08.log"
-                           }
-                        },
                         {
                            "key": "service_name",
                            "value": {
@@ -747,7 +400,19 @@
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/arc-sqlmi/mssql-server-stdout.log"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
                            }
                         },
                         {
@@ -759,7 +424,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -777,7 +442,7 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql_log.log"
+                              "stringValue": "mssql-server-supervisor.log"
                            }
                         }
                      ],
@@ -785,23 +450,11 @@
                      "spanId": ""
                   },
                   {
-                     "timeUnixNano": "1652048755173210382",
+                     "timeUnixNano": "1652102889591332674",
                      "body": {
-                        "stringValue": "2022-05-08 22:25:55.1527|INFO|Microsoft.Azure.Hybrid.Sql.Schedule.ScheduleRunner|Found schedules that are due. Now: 05/08/2022 22:25:55."
+                        "stringValue": "\r2022-05-09 13:28:09.94 spid19s     Version of database model_msdb at startup is 931."
                      },
                      "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/mssql/miaa-agent-2022-05-08.log"
-                           }
-                        },
                         {
                            "key": "service_name",
                            "value": {
@@ -811,7 +464,19 @@
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/arc-sqlmi/mssql-server-stdout.log"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
                            }
                         },
                         {
@@ -823,7 +488,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -841,7 +506,7 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql_log.log"
+                              "stringValue": "mssql-server-supervisor.log"
                            }
                         }
                      ],
@@ -849,23 +514,11 @@
                      "spanId": ""
                   },
                   {
-                     "timeUnixNano": "1652048755173211097",
+                     "timeUnixNano": "1652102889851550579",
                      "body": {
-                        "stringValue": "2022-05-08 22:25:55.1601|DEBUG|Microsoft.Azure.Hybrid.Sql.Schedule.ContainerPromotionSchedule|The temp container does not contain completed backup files. Not eligible for promoting to current."
+                        "stringValue": "\r2022-05-09 13:28:09.97 spid19s     SQL Server Audit is starting the audits. This is an informational message. No user action is required."
                      },
                      "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/mssql/miaa-agent-2022-05-08.log"
-                           }
-                        },
                         {
                            "key": "service_name",
                            "value": {
@@ -875,7 +528,19 @@
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/arc-sqlmi/mssql-server-stdout.log"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
                            }
                         },
                         {
@@ -887,7 +552,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -905,7 +570,7 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql_log.log"
+                              "stringValue": "mssql-server-supervisor.log"
                            }
                         }
                      ],
@@ -913,23 +578,11 @@
                      "spanId": ""
                   },
                   {
-                     "timeUnixNano": "1652048755173211574",
+                     "timeUnixNano": "1652102889851554393",
                      "body": {
-                        "stringValue": "2022-05-08 22:25:55.1601|INFO|Microsoft.Azure.Hybrid.Sql.Schedule.ScheduleRunner|Executing schedule result: False."
+                        "stringValue": "\r2022-05-09 13:28:09.97 spid19s     SQL Server Audit has started the audits. This is an informational message. No user action is required."
                      },
                      "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/mssql/miaa-agent-2022-05-08.log"
-                           }
-                        },
                         {
                            "key": "service_name",
                            "value": {
@@ -939,7 +592,19 @@
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/arc-sqlmi/mssql-server-stdout.log"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
                            }
                         },
                         {
@@ -951,7 +616,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -969,7 +634,7 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql_log.log"
+                              "stringValue": "mssql-server-supervisor.log"
                            }
                         }
                      ],
@@ -977,23 +642,11 @@
                      "spanId": ""
                   },
                   {
-                     "timeUnixNano": "1652048755173212051",
+                     "timeUnixNano": "1652102890091936826",
                      "body": {
-                        "stringValue": "2022-05-08 22:25:55.1641|DEBUG|Microsoft.Azure.Hybrid.Sql.Schedule.ContainerPromotionSchedule|The temp container does not contain completed backup files. Not eligible for promoting to current."
+                        "stringValue": "\r2022-05-09 13:28:10.54 spid19s     SQL Trace ID 1 was started by login \"sa\"."
                      },
                      "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/mssql/miaa-agent-2022-05-08.log"
-                           }
-                        },
                         {
                            "key": "service_name",
                            "value": {
@@ -1003,7 +656,19 @@
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:10Z"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/arc-sqlmi/mssql-server-stdout.log"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
                            }
                         },
                         {
@@ -1015,7 +680,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -1033,7 +698,7 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql_log.log"
+                              "stringValue": "mssql-server-supervisor.log"
                            }
                         }
                      ],
@@ -1041,23 +706,11 @@
                      "spanId": ""
                   },
                   {
-                     "timeUnixNano": "1652048755173212289",
+                     "timeUnixNano": "1652102890091939687",
                      "body": {
-                        "stringValue": "2022-05-08 22:25:55.1641|INFO|Microsoft.Azure.Hybrid.Sql.Schedule.ScheduleRunner|Executing schedule result: False."
+                        "stringValue": "\r2022-05-09 13:28:10.63 spid19s     Server name is 'gpm0mi01-0'. This is an informational message only. No user action is required."
                      },
                      "attributes": [
-                        {
-                           "key": "kubernetes_container_name",
-                           "value": {
-                              "stringValue": "arc-sqlmi"
-                           }
-                        },
-                        {
-                           "key": "file_path",
-                           "value": {
-                              "stringValue": "/var/log/mssql/miaa-agent-2022-05-08.log"
-                           }
-                        },
                         {
                            "key": "service_name",
                            "value": {
@@ -1067,7 +720,19 @@
                         {
                            "key": "es_process_timestamp",
                            "value": {
-                              "stringValue": "2022-05-08T22:25:55Z"
+                              "stringValue": "2022-05-09T13:28:10Z"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/log/arc-sqlmi/mssql-server-stdout.log"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
                            }
                         },
                         {
@@ -1079,7 +744,7 @@
                         {
                            "key": "kubernetes_node_name",
                            "value": {
-                              "stringValue": "aks-agentpool-21933339-vmss000006"
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
                            }
                         },
                         {
@@ -1097,7 +762,647 @@
                         {
                            "key": "fluent.tag",
                            "value": {
-                              "stringValue": "mssql_log.log"
+                              "stringValue": "mssql-server-supervisor.log"
+                           }
+                        }
+                     ],
+                     "traceId": "",
+                     "spanId": ""
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "resource": {},
+         "scopeLogs": [
+            {
+               "scope": {},
+               "logRecords": [
+                  {
+                     "timeUnixNano": "1652102889650000095",
+                     "body": {
+                        "stringValue": "spid22s     1 transactions rolled forward in database 'model' (3:0). This is an informational message only. No user action is required."
+                     },
+                     "attributes": [
+                        {
+                           "key": "service_name",
+                           "value": {
+                              "stringValue": "mssql-server"
+                           }
+                        },
+                        {
+                           "key": "es_process_timestamp",
+                           "value": {
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/opt/mssql/log/errorlog"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:09.65"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_namespace",
+                           "value": {
+                              "stringValue": "arc-primary"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_node_name",
+                           "value": {
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_pod_name",
+                           "value": {
+                              "stringValue": "gpm0mi01-0"
+                           }
+                        },
+                        {
+                           "key": "custom_resource_name",
+                           "value": {
+                              "stringValue": "gpm0mi01"
+                           }
+                        },
+                        {
+                           "key": "fluent.tag",
+                           "value": {
+                              "stringValue": "errorlog.log"
+                           }
+                        }
+                     ],
+                     "traceId": "",
+                     "spanId": ""
+                  },
+                  {
+                     "timeUnixNano": "1652102889650000095",
+                     "body": {
+                        "stringValue": "spid22s     0 transactions rolled back in database 'model' (3:0). This is an informational message only. No user action is required."
+                     },
+                     "attributes": [
+                        {
+                           "key": "service_name",
+                           "value": {
+                              "stringValue": "mssql-server"
+                           }
+                        },
+                        {
+                           "key": "es_process_timestamp",
+                           "value": {
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/opt/mssql/log/errorlog"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:09.65"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_namespace",
+                           "value": {
+                              "stringValue": "arc-primary"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_node_name",
+                           "value": {
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_pod_name",
+                           "value": {
+                              "stringValue": "gpm0mi01-0"
+                           }
+                        },
+                        {
+                           "key": "custom_resource_name",
+                           "value": {
+                              "stringValue": "gpm0mi01"
+                           }
+                        },
+                        {
+                           "key": "fluent.tag",
+                           "value": {
+                              "stringValue": "errorlog.log"
+                           }
+                        }
+                     ],
+                     "traceId": "",
+                     "spanId": ""
+                  },
+                  {
+                     "timeUnixNano": "1652102889650000095",
+                     "body": {
+                        "stringValue": "spid22s     Recovery is writing a checkpoint in database 'model' (3). This is an informational message only. No user action is required."
+                     },
+                     "attributes": [
+                        {
+                           "key": "service_name",
+                           "value": {
+                              "stringValue": "mssql-server"
+                           }
+                        },
+                        {
+                           "key": "es_process_timestamp",
+                           "value": {
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/opt/mssql/log/errorlog"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:09.65"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_namespace",
+                           "value": {
+                              "stringValue": "arc-primary"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_node_name",
+                           "value": {
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_pod_name",
+                           "value": {
+                              "stringValue": "gpm0mi01-0"
+                           }
+                        },
+                        {
+                           "key": "custom_resource_name",
+                           "value": {
+                              "stringValue": "gpm0mi01"
+                           }
+                        },
+                        {
+                           "key": "fluent.tag",
+                           "value": {
+                              "stringValue": "errorlog.log"
+                           }
+                        }
+                     ],
+                     "traceId": "",
+                     "spanId": ""
+                  },
+                  {
+                     "timeUnixNano": "1652102889650000095",
+                     "body": {
+                        "stringValue": "spid19s     [32761]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 0. CleanupUnderUserTransaction: 0. TranLevelPVS: 0"
+                     },
+                     "attributes": [
+                        {
+                           "key": "service_name",
+                           "value": {
+                              "stringValue": "mssql-server"
+                           }
+                        },
+                        {
+                           "key": "es_process_timestamp",
+                           "value": {
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/opt/mssql/log/errorlog"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:09.65"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_namespace",
+                           "value": {
+                              "stringValue": "arc-primary"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_node_name",
+                           "value": {
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_pod_name",
+                           "value": {
+                              "stringValue": "gpm0mi01-0"
+                           }
+                        },
+                        {
+                           "key": "custom_resource_name",
+                           "value": {
+                              "stringValue": "gpm0mi01"
+                           }
+                        },
+                        {
+                           "key": "fluent.tag",
+                           "value": {
+                              "stringValue": "errorlog.log"
+                           }
+                        }
+                     ],
+                     "traceId": "",
+                     "spanId": ""
+                  },
+                  {
+                     "timeUnixNano": "1652102889660000085",
+                     "body": {
+                        "stringValue": "spid19s     Starting up database 'model_msdb'."
+                     },
+                     "attributes": [
+                        {
+                           "key": "service_name",
+                           "value": {
+                              "stringValue": "mssql-server"
+                           }
+                        },
+                        {
+                           "key": "es_process_timestamp",
+                           "value": {
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/opt/mssql/log/errorlog"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:09.66"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_namespace",
+                           "value": {
+                              "stringValue": "arc-primary"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_node_name",
+                           "value": {
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_pod_name",
+                           "value": {
+                              "stringValue": "gpm0mi01-0"
+                           }
+                        },
+                        {
+                           "key": "custom_resource_name",
+                           "value": {
+                              "stringValue": "gpm0mi01"
+                           }
+                        },
+                        {
+                           "key": "fluent.tag",
+                           "value": {
+                              "stringValue": "errorlog.log"
+                           }
+                        }
+                     ],
+                     "traceId": "",
+                     "spanId": ""
+                  },
+                  {
+                     "timeUnixNano": "1652102889940000057",
+                     "body": {
+                        "stringValue": "spid19s     Version of database model_msdb at startup is 931."
+                     },
+                     "attributes": [
+                        {
+                           "key": "service_name",
+                           "value": {
+                              "stringValue": "mssql-server"
+                           }
+                        },
+                        {
+                           "key": "es_process_timestamp",
+                           "value": {
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/opt/mssql/log/errorlog"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:09.94"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_namespace",
+                           "value": {
+                              "stringValue": "arc-primary"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_node_name",
+                           "value": {
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_pod_name",
+                           "value": {
+                              "stringValue": "gpm0mi01-0"
+                           }
+                        },
+                        {
+                           "key": "custom_resource_name",
+                           "value": {
+                              "stringValue": "gpm0mi01"
+                           }
+                        },
+                        {
+                           "key": "fluent.tag",
+                           "value": {
+                              "stringValue": "errorlog.log"
+                           }
+                        }
+                     ],
+                     "traceId": "",
+                     "spanId": ""
+                  },
+                  {
+                     "timeUnixNano": "1652102889970000028",
+                     "body": {
+                        "stringValue": "spid19s     SQL Server Audit is starting the audits. This is an informational message. No user action is required."
+                     },
+                     "attributes": [
+                        {
+                           "key": "service_name",
+                           "value": {
+                              "stringValue": "mssql-server"
+                           }
+                        },
+                        {
+                           "key": "es_process_timestamp",
+                           "value": {
+                              "stringValue": "2022-05-09T13:28:09Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/opt/mssql/log/errorlog"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:09.97"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_namespace",
+                           "value": {
+                              "stringValue": "arc-primary"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_node_name",
+                           "value": {
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_pod_name",
+                           "value": {
+                              "stringValue": "gpm0mi01-0"
+                           }
+                        },
+                        {
+                           "key": "custom_resource_name",
+                           "value": {
+                              "stringValue": "gpm0mi01"
+                           }
+                        },
+                        {
+                           "key": "fluent.tag",
+                           "value": {
+                              "stringValue": "errorlog.log"
+                           }
+                        }
+                     ],
+                     "traceId": "",
+                     "spanId": ""
+                  },
+                  {
+                     "timeUnixNano": "1652102889970000028",
+                     "body": {
+                        "stringValue": "spid19s     SQL Server Audit has started the audits. This is an informational message. No user action is required."
+                     },
+                     "attributes": [
+                        {
+                           "key": "service_name",
+                           "value": {
+                              "stringValue": "mssql-server"
+                           }
+                        },
+                        {
+                           "key": "es_process_timestamp",
+                           "value": {
+                              "stringValue": "2022-05-09T13:28:10Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/opt/mssql/log/errorlog"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:09.97"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_namespace",
+                           "value": {
+                              "stringValue": "arc-primary"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_node_name",
+                           "value": {
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_pod_name",
+                           "value": {
+                              "stringValue": "gpm0mi01-0"
+                           }
+                        },
+                        {
+                           "key": "custom_resource_name",
+                           "value": {
+                              "stringValue": "gpm0mi01"
+                           }
+                        },
+                        {
+                           "key": "fluent.tag",
+                           "value": {
+                              "stringValue": "errorlog.log"
+                           }
+                        }
+                     ],
+                     "traceId": "",
+                     "spanId": ""
+                  },
+                  {
+                     "timeUnixNano": "1652102890539999961",
+                     "body": {
+                        "stringValue": "spid19s     SQL Trace ID 1 was started by login \"sa\"."
+                     },
+                     "attributes": [
+                        {
+                           "key": "service_name",
+                           "value": {
+                              "stringValue": "mssql-server"
+                           }
+                        },
+                        {
+                           "key": "es_process_timestamp",
+                           "value": {
+                              "stringValue": "2022-05-09T13:28:10Z"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_container_name",
+                           "value": {
+                              "stringValue": "arc-sqlmi"
+                           }
+                        },
+                        {
+                           "key": "file_path",
+                           "value": {
+                              "stringValue": "/var/opt/mssql/log/errorlog"
+                           }
+                        },
+                        {
+                           "key": "time",
+                           "value": {
+                              "stringValue": "2022-05-09 13:28:10.54"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_namespace",
+                           "value": {
+                              "stringValue": "arc-primary"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_node_name",
+                           "value": {
+                              "stringValue": "aks-agentpool-21933339-vmss000008"
+                           }
+                        },
+                        {
+                           "key": "kubernetes_pod_name",
+                           "value": {
+                              "stringValue": "gpm0mi01-0"
+                           }
+                        },
+                        {
+                           "key": "custom_resource_name",
+                           "value": {
+                              "stringValue": "gpm0mi01"
+                           }
+                        },
+                        {
+                           "key": "fluent.tag",
+                           "value": {
+                              "stringValue": "errorlog.log"
                            }
                         }
                      ],

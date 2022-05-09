@@ -8,8 +8,8 @@
     "hostname": "ryo0mi01-0",
     "source": "fluentbit",
     "severity": "DEBUG",
-    "timestamp": "2022-05-08T22:25:55Z",
-    "timestamp-type": "SHIP",
+    "timestamp": "1652102878323999881",
+    "timestamp-type": "UNIXNANO",
     "message": "[configuration-agent] 2022/05/09 16:45:14 [DEBUG] Successfully get AG configurations from replica gpm0mi01-0 with config: configs:<key:\"gpm0mi01\" value:<ag_name:\"gpm0mi01\" replica_name:\"gpm0mi01-0\" availability_mode:SYNCHRONOUS_COMMIT replica_role:REPLICA_PRIMARY is_synchronized:true > > "
   },
   "laas": {
