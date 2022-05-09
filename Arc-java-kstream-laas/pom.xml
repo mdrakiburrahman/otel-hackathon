@@ -199,7 +199,7 @@
 					<archive>
 						<manifest>
 							<mainClass>
-								com.microsoft.kstream.KSTREAM
+								com.microsoft.kstream.DbaasStreamApp
 								<!-- Entry point -->
 							</mainClass>
 						</manifest>

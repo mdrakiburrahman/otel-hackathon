@@ -4,7 +4,7 @@
             "type": "java",
             "name": "Launch App",
             "request": "launch",
-            "mainClass": "com.microsoft.kstream.KSTREAM",
+            "mainClass": "com.microsoft.kstream.DbaasStreamApp",
             "projectName": "kstream-arc"
         },
         {
@@ -14,7 +14,7 @@
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopOnEntry": false,
-            "mainClass": "com.microsoft.kstream.KSTREAM",
+            "mainClass": "com.microsoft.kstream.DbaasStreamApp",
             "args": "",
             "projectName": "kstream-arc"
         }
