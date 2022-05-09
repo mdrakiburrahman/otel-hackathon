@@ -20,7 +20,7 @@ public class DbaasStreamApp {
 
     public static void main(String[] args) {
         // TODO:
-        // 4. DbaaS/LaaS model
+        // 4. DbaaS/LaaS model gen
         // 5. Transformation
 
         System.out.println("\n==========================================================");
@@ -59,7 +59,6 @@ public class DbaasStreamApp {
             .to("dbaas.flat", Produced.with(Serdes.String(), Serdes.String()));
 
         // 6. Create Topology and create Stream
-
         Topology dbaasTopology = builder.build();
         
         System.out.println("\n➡  STARTING THE FOLLOWING TOPOLOGY:");
