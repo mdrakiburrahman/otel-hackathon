@@ -14,7 +14,7 @@ public class OtlpJSON implements Serializable
     @SerializedName("resourceLogs")
     @Expose
     private List<ResourceLog> resourceLogs = null;
-    private final static long serialVersionUID = -195163773006395008L;
+    private final static long serialVersionUID = -2165052290252483073L;
 
     public List<ResourceLog> getResourceLogs() {
         return resourceLogs;

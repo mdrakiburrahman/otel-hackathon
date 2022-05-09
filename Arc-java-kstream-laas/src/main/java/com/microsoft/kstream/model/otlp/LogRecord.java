@@ -26,7 +26,7 @@ public class LogRecord implements Serializable
     @SerializedName("spanId")
     @Expose
     private String spanId;
-    private final static long serialVersionUID = -7088142358617726403L;
+    private final static long serialVersionUID = -363597920151336579L;
 
     public String getTimeUnixNano() {
         return timeUnixNano;

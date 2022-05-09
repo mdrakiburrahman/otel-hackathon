@@ -17,7 +17,7 @@ public class ResourceLog implements Serializable
     @SerializedName("scopeLogs")
     @Expose
     private List<ScopeLog> scopeLogs = null;
-    private final static long serialVersionUID = -5348565482887091532L;
+    private final static long serialVersionUID = -5884875080268930020L;
 
     public Resource getResource() {
         return resource;

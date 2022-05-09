@@ -1,6 +1,7 @@
 package com.microsoft.kstream;
 
 import com.microsoft.kstream.model.otlp.*;
+import com.microsoft.kstream.model.dbaas.*;
 
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -35,8 +36,9 @@ public class DbaasStreamApp {
         // 2. Stream Builder
         StreamsBuilder builder = new StreamsBuilder();
 
-        // 3. Initialize OTEL specific Serdes
+        // 3. Initialize SERializer DESerializers
         Serde<OtlpJSON> otlpSerde = Serdes.serdeFrom(new JsonSerializer<>(), new JsonDeserializer<>(OtlpJSON.class));
+        Serde<LaasJSON> dbaasSerde = Serdes.serdeFrom(new JsonSerializer<>(), new JsonDeserializer<>(LaasJSON.class));
 
         // 4. Create KStream with DbaaS Serdes
         KStream<String, OtlpJSON> KS0 = builder.stream(FanOutConfigs.arcTopic, Consumed.with(Serdes.String(), otlpSerde));

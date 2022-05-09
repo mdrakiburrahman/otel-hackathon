@@ -8,7 +8,7 @@ import javax.annotation.Generated;
 public class Scope implements Serializable
 {
 
-    private final static long serialVersionUID = -4262583398263983553L;
+    private final static long serialVersionUID = -563011616865880621L;
 
     @Override
     public String toString() {

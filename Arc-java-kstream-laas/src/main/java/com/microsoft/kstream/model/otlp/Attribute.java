@@ -16,7 +16,7 @@ public class Attribute implements Serializable
     @SerializedName("value")
     @Expose
     private Value value;
-    private final static long serialVersionUID = 5161160234270828777L;
+    private final static long serialVersionUID = 4251343897911260062L;
 
     public String getKey() {
         return key;

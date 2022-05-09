@@ -8,7 +8,7 @@ import javax.annotation.Generated;
 public class Resource implements Serializable
 {
 
-    private final static long serialVersionUID = 6540182185246968594L;
+    private final static long serialVersionUID = -4344455004699606264L;
 
     @Override
     public String toString() {

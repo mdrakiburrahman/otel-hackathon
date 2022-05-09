@@ -17,7 +17,7 @@ public class ScopeLog implements Serializable
     @SerializedName("logRecords")
     @Expose
     private List<LogRecord> logRecords = null;
-    private final static long serialVersionUID = -7763921848041725878L;
+    private final static long serialVersionUID = -1301937542159328230L;
 
     public Scope getScope() {
         return scope;

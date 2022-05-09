@@ -13,7 +13,7 @@ public class Body implements Serializable
     @SerializedName("stringValue")
     @Expose
     private String stringValue;
-    private final static long serialVersionUID = 1936324929237406954L;
+    private final static long serialVersionUID = -7124596092147547102L;
 
     public String getStringValue() {
         return stringValue;

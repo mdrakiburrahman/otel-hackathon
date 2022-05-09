@@ -13,7 +13,7 @@ public class Value implements Serializable
     @SerializedName("stringValue")
     @Expose
     private String stringValue;
-    private final static long serialVersionUID = 1056503805876886786L;
+    private final static long serialVersionUID = 6496687078015529290L;
 
     public String getStringValue() {
         return stringValue;
