@@ -18,49 +18,40 @@ import org.apache.kafka.streams.kstream.Produced;
 import java.util.Arrays;
 import java.util.Properties;
 
-import com.microsoft.kstream.model.*;
 import com.microsoft.kstream.serde.JsonSerializer;
+import com.microsoft.kstream.model.otlp.*;
 import com.microsoft.kstream.serde.JsonDeserializer;
 
 
-public final class KSTREAM {
+public class KSTREAM {
 
     public static void main(String[] args) {
-        // 1. Kafka Environment Variables
-        final var topic = System.getenv("KAFKA_TOPIC");
-        final var broker = System.getenv("KAFKA_BROKER_ADDRESS");
-        final var consumer_self = System.getenv("KAFKA_CONSUMER_NAME_SELF");
-
         System.out.println("\n==========================================================");
         System.out.println("➡  INIT KSTREAM ➡➡➡");
         System.out.println("==========================================================");
 
-        // 2. Create stream configuration
-        final Properties props = new Properties();
-        props.put(StreamsConfig.APPLICATION_ID_CONFIG, consumer_self);
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, broker);
+        // 1. Create stream configuration
+        Properties props = new Properties();
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG, FanOutConfigs.applicationID);
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, FanOutConfigs.broker);
         props.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, "0");
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
-        // 3. Stream Builder
-        final StreamsBuilder streamsBuilder = new StreamsBuilder();
+        // 2. Stream Builder
+        StreamsBuilder builder = new StreamsBuilder();
 
-        // 4. Generate a SERDE from our JSON POJO
-        final Serde<OtlpJSON> otlpSerde = Serdes.serdeFrom(new JsonSerializer<>(),
+        // 3. Generate a SERDE from our JSON POJO - MOVE TO OWN CLASS
+        Serde<OtlpJSON> otlpSerde = Serdes.serdeFrom(new JsonSerializer<>(),
                                                                new JsonDeserializer<>(OtlpJSON.class));
 
-        final KStream<String, OtlpJSON> otlp = streamsBuilder.stream(topic, Consumed.with(Serdes.String(), otlpSerde));        
+        KStream<String, OtlpJSON> otlp = builder.stream(FanOutConfigs.arcTopic, Consumed.with(Serdes.String(), otlpSerde));        
 
-        // 5. Process Stream
+        // 4. Process Stream
         // Print as-is to console
         otlp.print(Printed.toSysOut());
 
         // Write as is to RAW topic
-        otlp.to("dbaas.raw", Produced.with(Serdes.String(), otlpSerde));
-
-        // Write to dbaas.flat topic
-        // final Serde<Body> bodySerde = Serdes.serdeFrom(new JsonSerializer<>(),
-        //                                                        new JsonDeserializer<>(Body.class));
+        otlp.to(FanOutConfigs.dbaasStandardTopic, Produced.with(Serdes.String(), otlpSerde));
 
         // Get resourceLogs.scopeLogs.logRecords.body.stringValue and write to dbaas.flat
         otlp.mapValues(value -> value.getResourceLogs())
@@ -72,12 +63,12 @@ public final class KSTREAM {
             .mapValues(value -> value.getBody().getStringValue())
             .to("dbaas.flat", Produced.with(Serdes.String(), Serdes.String()));
 
-        // 6. Create Topology and create Stream
-        final KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
+        // 5. Create Topology and create Stream
+        KafkaStreams streams = new KafkaStreams(builder.build(), props);
         System.out.println("➡  STARTING STREAM...");
         streams.start();
 
-        // 7. Attach shutdown handler to runtime to catch SIGTERM (aka Ctrl-C)
+        // 6. Attach shutdown handler to runtime to catch SIGTERM (aka Ctrl-C)
         Runtime.getRuntime().addShutdownHook(new Thread( () -> {
             System.out.println("➡  STOPPING STREAM...");
             streams.close();

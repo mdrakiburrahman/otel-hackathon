@@ -1,5 +1,5 @@
 
-package com.microsoft.kstream.model;
+package com.microsoft.kstream.model.otlp;
 
 import java.io.Serializable;
 import java.util.List;

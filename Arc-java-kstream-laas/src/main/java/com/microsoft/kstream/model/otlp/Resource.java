@@ -1,19 +1,19 @@
 
-package com.microsoft.kstream.model;
+package com.microsoft.kstream.model.otlp;
 
 import java.io.Serializable;
 import javax.annotation.Generated;
 
 @Generated("jsonschema2pojo")
-public class Scope implements Serializable
+public class Resource implements Serializable
 {
 
-    private final static long serialVersionUID = -4262583398263983553L;
+    private final static long serialVersionUID = 6540182185246968594L;
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Scope.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(Resource.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {
