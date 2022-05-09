@@ -21,7 +21,6 @@ public class DbaasStreamApp {
 
     public static void main(String[] args) {
         // TODO:
-        // 4. DbaaS/LaaS model gen
         // 5. Transformation
 
         System.out.println("\n==========================================================");
