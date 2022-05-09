@@ -1,0 +1,30 @@
+{
+  "raw": {
+    "body": "[configuration-agent] 2022/05/09 16:45:14 [DEBUG] Successfully get AG configurations from replica gpm0mi01-0 with config: configs:<key:\"gpm0mi01\" value:<ag_name:\"gpm0mi01\" replica_name:\"gpm0mi01-0\" availability_mode:SYNCHRONOUS_COMMIT replica_role:REPLICA_PRIMARY is_synchronized:true > > "
+  },
+  "std": {
+    "appcode": "ryo0",
+    "environment": "DEV",
+    "hostname": "ryo0mi01-0",
+    "source": "fluentbit",
+    "severity": "DEBUG",
+    "timestamp": "2022-05-08T22:25:55Z",
+    "timestamp-type": "SHIP",
+    "message": "[configuration-agent] 2022/05/09 16:45:14 [DEBUG] Successfully get AG configurations from replica gpm0mi01-0 with config: configs:<key:\"gpm0mi01\" value:<ag_name:\"gpm0mi01\" replica_name:\"gpm0mi01-0\" availability_mode:SYNCHRONOUS_COMMIT replica_role:REPLICA_PRIMARY is_synchronized:true > > "
+  },
+  "laas": {
+    "appcode": "dba5",
+    "timestamp": "2022-05-08T22:25:55Z"
+  },
+  "private": {
+    "custom_resource_name": "ryo0mi01",
+    "es_process_timestamp": "2022-05-08T22:25:55Z",
+    "file_path": "/var/log/arc-sqlmi/mssql-miaa-agent-stdout.log",
+    "fluent.tag": "mssql-miaa-agent.log",
+    "kubernetes_container_name": "arc-sqlmi",
+    "kubernetes_namespace": "arc-primary",
+    "kubernetes_node_name": "aks-agentpool-21933339-vmss000006",
+    "kubernetes_pod_name": "ryo0mi01-0",
+    "service_name": "mssql-miaa-agent"
+  }
+}

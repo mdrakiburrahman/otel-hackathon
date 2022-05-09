@@ -47,12 +47,14 @@ spec:
     protocol: TCP
     targetPort: 1433
 EOF
+
+kubectl get svc controldb-external-svc -n $ns
 ```
 
 Summary:
 | Tech | Endpoint              | Credentials                                        | Encryption Password              |
 | ---- | --------------------- | -------------------------------------------------- | -------------------------------- |
-| FSM  | `20.120.66.217,31433` | controldb-rw-user:7l1ZKJpTqbFXUzmJf1w-mgGk3-8D1DW- | HnUnfSCkkCtMeRZbN3AQvgIDyTVNBSVl |
+| FSM  | `20.124.51.10,31433`  | controldb-rw-user:OlH_lQt3WCodUZqugp-bRDl8LwjrPwgq | peWsTh5EDGFHT6k5eF53Ot2kUvGWVZTK |
 
 Grab relevant Arc certs out and create configMap for OTEL:
 
@@ -92,7 +94,7 @@ SELECT file_path, secret_decrypted FROM (
 WHERE file_path = '/config/namespaces/arc-primary/scaledsets/gpm0mi01/containers/fluentbit/files/fluentbit-out-elasticsearch.conf'
 ORDER BY created_time DESC
 ```
-We will need to reboot the container so it picks up this new file from FSM during bootup.
+We will need to reboot the container so it picks up this new file from FSM during bootup - but we will do this **after** deploying the OTEL collector to ensure Fluentbit doesn't error.
 
 ### Kafka and Elastic setup
 
@@ -128,7 +130,7 @@ kubectl apply -f /workspaces/otel-hackathon/Arc-otel-experiment/kubernetes-otel-
 # Create OTEL Collector - receives stuff from fluentbit
 kubectl apply -f /workspaces/otel-hackathon/Arc-otel-experiment/kubernetes-otel-collector.yml
 ```
-Reboot SQL MI to fire Fluentbit up:
+Reboot SQL MI to fire Fluentbit up with the new config:
 ```bash
 kubectl delete pod gpm0mi01-0 -n arc-primary --grace-period=0 --force
 ```
@@ -167,6 +169,9 @@ cat /run/fluentbit/fluentbit-out-elasticsearch.conf
 tail -f /var/log/fluentbit/fluentbit.log -n +1
 ```
 
+Go into `laas` Kafdrop - make sure the 2 otel topics are showing.
+Go into Elastic UI and create index against otel.
+
 ### Java Container: KStream Processing
 ```powershell
 cd C:\Users\mdrrahman\Documents\GitHub\otel-hackathon
@@ -174,12 +179,13 @@ code -r Arc-java-kstream-laas
 ```
 Inside the container:
 ```bash
-# Set environment variables in devcontainer.env, specially the Broker Public IP Address
+# Set environment variables in devcontainer.env, specially the LaaS Kafka Broker Public IP Address
 
 # Build and run package
 clear && mvn clean install && java -jar target/kstream-arc-1.0-SNAPSHOT.jar
 ```
 
+### K8s Dashboard
 Open up Kubernetes Dashboard in this container:
 ```bash
 kubectl proxy

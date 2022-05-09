@@ -19,7 +19,7 @@ namespace TestApp1
 
             string connString = $@"Server = {controllerIP}; Database = controller; User ID = controldb-rw-user; Password = {controllerPassword};";
             string targetFile = $@"/config/namespaces/{arcNamespace}/scaledsets/{miCR}/containers/fluentbit/files/fluentbit-out-elasticsearch.conf";
-            string sourceFile = @"/workspaces/otel-hackathon/Arc-file-delivery-injector/Injector/files/elasticsearch_otel.conf";
+            string sourceFile = @"/workspaces/otel-hackathon/Arc-dotnet-file-delivery-injector/Injector/files/elasticsearch_otel.conf";
 
             // Read in text file from drive
             String sourceText = ReadFile(sourceFile);
