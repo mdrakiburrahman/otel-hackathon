@@ -105,7 +105,7 @@ OPEN SYMMETRIC KEY ControllerDbSymmetricKey DECRYPTION BY PASSWORD = 'HnUnfSCkkC
 SELECT file_path, secret_decrypted FROM (
     select *, convert(varchar(max), DECRYPTBYKEY(data)) as 'secret_decrypted' from controller.dbo.Files
 ) AS T
-WHERE file_path = '/config/namespaces/arc-primary/scaledsets/gpm0mi01/containers/fluentbit/files/fluentbit-out-elasticsearch.conf'
+WHERE file_path = '/config/namespaces/azure-arc-data/scaledsets/gpm0mi01/containers/fluentbit/files/fluentbit-out-elasticsearch.conf'
 ORDER BY created_time DESC
 ```
 We will need to reboot the container so it picks up this new file from FSM during bootup - but we will do this **after** deploying the OTEL collector to ensure Fluentbit doesn't error.
@@ -154,9 +154,9 @@ kubectl apply -f /workspaces/otel-hackathon/Arc-otel-experiment/kubernetes-otel-
 ```
 Reboot SQL MI to fire Fluentbit up with the new config:
 ```bash
-kubectl delete pod gpm0mi01-0 -n arc-primary --grace-period=0 --force
+kubectl delete pod guedlcmi1p001-0 -n azure-arc-data --grace-period=0 --force
 ```
-Tail fluentbit in case something breaks:
+Tail fluentbit container in case something breaks:
 ```bash
 # The file we pushed via FSM
 cat /run/fluentbit/fluentbit-out-elasticsearch.conf
@@ -182,7 +182,7 @@ cat /run/fluentbit/fluentbit-out-elasticsearch.conf
 # [OUTPUT]
 #     Name                  Forward
 #     Match                 *
-#     Host                  otel-collector.arc-primary.svc.cluster.local
+#     Host                  otel-collector.azure-arc-data.svc.cluster.local
 #     Port                  8006
 #     Require_ack_response  True
 #     tls                   Off
