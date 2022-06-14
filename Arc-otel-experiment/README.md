@@ -191,7 +191,7 @@ cat /run/fluentbit/fluentbit-out-elasticsearch.conf
 tail -f /var/log/fluentbit/fluentbit.log -n +1
 ```
 
-Go into `laas` Kafdrop - make sure the 2 otel topics are showing.
+Go into `laas` Kafdrop - make sure the otel topics are showing.
 Go into Elastic UI and create index against otel.
 
 ### Java Container: KStream Processing
