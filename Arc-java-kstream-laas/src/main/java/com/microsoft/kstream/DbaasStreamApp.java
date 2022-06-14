@@ -20,9 +20,6 @@ import java.util.*;
 public class DbaasStreamApp {
 
     public static void main(String[] args) {
-        // TODO:
-        // 5. Transformation
-
         System.out.println("\n==========================================================");
         System.out.println("➡  INIT KSTREAM ➡➡➡");
         System.out.println("==========================================================");
