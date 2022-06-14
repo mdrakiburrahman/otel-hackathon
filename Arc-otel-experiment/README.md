@@ -2,11 +2,20 @@
 
 ## Environment: Arc Indirect on AKS
 
-> **Pre-req**: Have an Arc Data Indirect/Direct cluster that has an MI deployed
+> **Pre-req**: Have an Arc Data Indirect/Direct cluster
+
+### Connect to devcontainer
+```powershell
+code -r .\Arc-otel-experiment\
+```
 
 ### Get kubeconfig from Azure
 
 ```bash
+export resourceGroup='arcrbac-46714061-rg'
+export clusterName='arcrbac-46714061-aks'
+export ns='azure-arc-data'
+
 # Login as service principal
 az login --service-principal --username $spnClientId --password $spnClientSecret --tenant $spnTenantId
 az account set --subscription $subscriptionId
@@ -15,8 +24,6 @@ az account set --subscription $subscriptionId
 az aks get-credentials --resource-group $resourceGroup --name $clusterName --admin
 
 kubectl get nodes
-
-export ns=arc-primary
 ```
 
 ### Grab Arc secrets necessary for OTEL work
@@ -54,7 +61,7 @@ kubectl get svc controldb-external-svc -n $ns
 Summary:
 | Tech | Endpoint              | Credentials                                        | Encryption Password              |
 | ---- | --------------------- | -------------------------------------------------- | -------------------------------- |
-| FSM  | `20.124.51.10,31433`  | controldb-rw-user:OlH_lQt3WCodUZqugp-bRDl8LwjrPwgq | peWsTh5EDGFHT6k5eF53Ot2kUvGWVZTK |
+| FSM  | `20.241.209.220,31433`  | controldb-rw-user:LIFR2iH3sudqBxvoWc-4O1wEqMDGnZgC | e9VYRNwwnO-_kOlOgFJOOyqV6AUiD5MZ |
 
 Grab relevant Arc certs out and create configMap for OTEL:
 
@@ -65,13 +72,20 @@ chmod +x /workspaces/otel-hackathon/Arc-otel-experiment/scripts/pull-certs-into-
 # configmap/otel-cluster-config created
 ```
 
+### Deploy SQL MI
+```bash
+kubectl apply -f /workspaces/otel-hackathon/Arc-otel-experiment/kubernetes-sqlmi.yaml
+# secret/guedlcmi1p001-login-secret created
+# sqlmanagedinstance.sql.arcdata.microsoft.com/guedlcmi1p001 created
+```
+
 ### Dotnet Container: Inject OTEL config into Controller File Delivery Table
 
 Open up VSCode in seperate window containing the dotnet injector
 
 ```powershell
 cd C:\Users\mdrrahman\Documents\GitHub\otel-hackathon
-code -r Arc-dotnet-file-delivery-injector
+code -n Arc-dotnet-file-delivery-injector
 ```
 > Make sure to localize to IP of Controller DB and Password and encryptionKey in `devcontainer.env`
 
@@ -118,7 +132,13 @@ kubectl get svc -n laas | grep kafka-service
 # Go back into kubernetes-kafka-elastic-laas.yml and in the Kafka Deployment, set:
 # env:
 #   - name: ADVERTISED_HOST_NAME
-#   value: 52.226.243.196 # <- This is a hack to get things to work externally without DNS
+#   value: 52.226.243.196 # <- This is a hack to get kafka advertised hostnames to work externally without DNS
+
+# Reapply
+kubectl apply -f /workspaces/otel-hackathon/Arc-otel-experiment/kubernetes-kafka-elastic-laas.yml
+# ..
+# deployment.apps/kafka-1 configured
+# ...
 ```
 
 ### OTEL setup
@@ -126,6 +146,8 @@ kubectl get svc -n laas | grep kafka-service
 ```bash
 # Create OTEL Agent - pulls metrics from nodes
 kubectl apply -f /workspaces/otel-hackathon/Arc-otel-experiment/kubernetes-otel-agent.yml
+# configmap/otel-agent-conf created
+# daemonset.apps/otel-agent created
 
 # Create OTEL Collector - receives stuff from fluentbit
 kubectl apply -f /workspaces/otel-hackathon/Arc-otel-experiment/kubernetes-otel-collector.yml
@@ -188,7 +210,9 @@ clear && mvn clean install && java -jar target/kstream-arc-1.0-SNAPSHOT.jar
 ### K8s Dashboard
 Open up Kubernetes Dashboard in this container:
 ```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
+
 kubectl proxy
-# http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/workloads?namespace=default
-# Point to kubeconfig
+# http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy
+# Point to kubeconfig: C:\Users\mdrrahman\.kube
 ```

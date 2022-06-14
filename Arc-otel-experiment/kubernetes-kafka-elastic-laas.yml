@@ -93,7 +93,10 @@ spec:
             - name: ZOOKEEPER_CONNECT
               value: zookeeper-1:2181
             - name: ADVERTISED_HOST_NAME
-              value: 52.226.243.196 # <- This is a hack to get things to work externally without DNS
+              # !!! This is a hack to get kafka to work externally without DNS !!!
+              # Basically, we need to inject in the LoadBalancer IP after the first deploy so Kafka advertises it
+              # Otherwise, Kafdrop and OTEL will not be able to connect because Kafka doesn't recognize the LoadBalancer IP as a valid host name
+              value: 40.88.21.2
 ---
 kind: Deployment
 apiVersion: apps/v1

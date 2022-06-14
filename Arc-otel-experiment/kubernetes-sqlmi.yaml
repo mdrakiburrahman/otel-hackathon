@@ -1,0 +1,61 @@
+apiVersion: v1
+data:
+  password: YWNudG9yUFJFU1RPIQ==
+  username: Ym9vcg==
+kind: Secret
+metadata:
+  name: guedlcmi1p001-login-secret
+  namespace: azure-arc-data
+type: Opaque
+---
+apiVersion: sql.arcdata.microsoft.com/v5
+kind: SqlManagedInstance
+metadata:
+  name: guedlcmi1p001
+  namespace: azure-arc-data
+  annotations:
+    AppCode-annotation: 1p00
+    foo-annotation: bar
+  labels:
+    AppCode-label: 1p00
+    foo-label: bar
+spec:
+  backup:
+    retentionPeriodInDays: 7
+  dev: true
+  tier: GeneralPurpose
+  forceHA: "true"
+  licenseType: LicenseIncluded
+  replicas: 1
+  scheduling:
+    default:
+      resources:
+        limits:
+          cpu: "1"
+          memory: 2Gi
+        requests:
+          cpu: "1"
+          memory: 2Gi
+  security:
+    adminLoginSecret: guedlcmi1p001-login-secret
+  services:
+    primary:
+      type: LoadBalancer
+      port: 31433
+  storage:
+    backups:
+      volumes:
+        - className: azurefile
+          size: 5Gi
+    data:
+      volumes:
+        - className: managed-premium
+          size: 5Gi
+    datalogs:
+      volumes:
+        - className: managed-premium
+          size: 5Gi
+    logs:
+      volumes:
+        - className: managed-premium
+          size: 5Gi

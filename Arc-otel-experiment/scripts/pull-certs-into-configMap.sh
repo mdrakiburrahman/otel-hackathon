@@ -1,6 +1,6 @@
 CERTS_DIR='/workspaces/otel-hackathon/Arc-otel-experiment/certificates'
 CONTAINER_CERTS_DIR='/var/run/secrets/managed/certificates'
-NAMESPACE='arc-primary'
+NAMESPACE='azure-arc-data'
 OTEL_CONFIGMAP='otel-cluster-config'
 
 rm -rf $CERTS_DIR
