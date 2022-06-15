@@ -46,3 +46,6 @@ msbuild.wrn
 .vs/
 *.crt
 Tracing-tutorial/applications-go/videos-api-netcore/src/obj/Debug/net5.0/videos-api.csprojAssemblyReference.cache
+
+# OTLP + Proto
+*/*/opentelemetry/*

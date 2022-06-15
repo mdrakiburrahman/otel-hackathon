@@ -115,11 +115,35 @@ spec:
       containers:
         - name: kafdrop
           image: obsidiandynamics/kafdrop:latest
+          volumeMounts:
+          - name: kafdrop-proto-config-vol
+            mountPath: /var/protobuf_desc
           ports:
             - containerPort: 9000
           env:
             - name: KAFKA_BROKERCONNECT
               value: "kafka-service:9092"
+            - name: KUBERNETES_HOST_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
+            - name: KUBERNETES_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: CMD_ARGS
+              value: "--message.format=PROTOBUF --protobufdesc.directory=/var/protobuf_desc"
+      volumes:
+        - configMap:
+            name: kafdrop-proto-config
+            items:
+              - key: logs.desc
+                path: logs.desc
+              - key: metrics.desc
+                path: metrics.desc
+          name: kafdrop-proto-config-vol
 ---
 # - - - - - - -
 # Services

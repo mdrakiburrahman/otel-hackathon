@@ -216,3 +216,20 @@ kubectl proxy
 # http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy
 # Point to kubeconfig: C:\Users\mdrrahman\.kube
 ```
+
+### Protobuf support for Kafdrop
+
+```bash
+# Generate protobuf descriptor file
+cd /workspaces/otel-hackathon/Arc-otel-experiment/otlp_proto
+# Works OOTB
+protoc -o logs.desc logs.proto
+
+# Had to remove a few "optional" tags
+protoc -o metrics.desc metrics.proto
+
+# Create configmap for Kafdrop
+kubectl create configmap kafdrop-proto-config -n laas \
+        --from-file=logs.desc \
+        --from-file=metrics.desc
+```

@@ -1,0 +1,231 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-conf
+  namespace: azure-arc-data
+  labels:
+    app: opentelemetry
+    component: otel-collector-conf
+data:
+  otel-collector-config: |
+    exporters:
+      kafka/laas-json:
+        protocol_version: 2.0.0
+        brokers: kafka-service.laas.svc:9092
+        topic: otel.fluentbit.json
+        encoding: otlp_json
+
+      kafka/laas-proto:
+        protocol_version: 2.0.0
+        brokers: kafka-service.laas.svc:9092
+        topic: otel.fluentbit.proto
+        encoding: otlp_proto
+
+      elasticsearch/laas:
+        endpoints:
+        - "http://elk-service.laas.svc:9200"
+        index: otel
+      
+      logging:
+        logLevel: DEBUG
+        
+    extensions:
+      zpages: null
+      k8s_observer:
+        auth_type: serviceAccount
+        node: ${K8S_NODE_NAME}
+
+    processors:
+      batch: null
+
+      # This is just for test - I am try
+      attributes/k8sify:
+        actions:
+          - key: k8s.container.name
+            from_attribute: kubernetes_container_name
+            action: upsert
+          - key: k8s.namespace.name
+            from_attribute: kubernetes_namespace
+            action: upsert
+          - key: k8s.node.name
+            from_attribute: kubernetes_node_name
+            action: upsert
+          - key: k8s.podstub.name
+            from_attribute: kubernetes_pod_name
+            action: upsert
+
+      k8sattributes:
+        filter:
+          node_from_env_var: ${K8S_NODE_NAME}
+        extract:
+          annotations:
+          - from: pod
+            key: AppCode-annotation
+          - from: pod
+            key: foo-annotation
+          labels:
+          - key: AppCode-label
+          - key: foo-label
+          metadata:
+          - k8s.namespace.name
+          - k8s.node.name
+          - k8s.pod.name
+          - k8s.pod.uid
+          - container.id
+          - container.image.name
+          - container.image.tag
+        pod_association:
+        - from: connection
+          name: ip
+        - from: resource_attribute
+          name: k8s.pod.name
+        - from: resource_attribute
+          name: ip
+        - from: resource_attribute
+          name: k8s.pod.ip
+        - from: resource_attribute
+          name: host.name
+
+    receivers:
+      fluentforward:
+        endpoint: 0.0.0.0:8006
+
+    service:
+      extensions:
+      - k8s_observer
+      - zpages
+
+      pipelines:
+        logs:
+          receivers: 
+          - fluentforward
+          processors:
+          - attributes/k8sify
+          - k8sattributes
+          - batch
+          exporters: 
+          - kafka/laas-json
+          - kafka/laas-proto
+          - elasticsearch/laas
+          #- logging
+---
+# Service account that allows Collector to interrogate K8s API
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: opentelemetry-collector-agent
+  namespace: azure-arc-data
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: otel-collector-agent-role
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: otel-collector-agent-role-binding
+subjects:
+  - kind: ServiceAccount
+    name: opentelemetry-collector-agent
+    namespace: azure-arc-data
+roleRef:
+  kind: ClusterRole
+  name: otel-collector-agent-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: otel-agent-fluentbit
+  namespace: azure-arc-data
+  labels:
+    app: opentelemetry
+    component: otel-collector
+spec:
+  selector:
+    matchLabels:
+      app: opentelemetry
+      component: otel-collector
+  template:
+    metadata:
+      labels:
+        app: opentelemetry
+        component: otel-collector
+    spec:
+      hostNetwork: false
+      nodeSelector:
+        kubernetes.io/os: linux
+      # Mount the service account that allows interrogating K8s API
+      serviceAccountName: opentelemetry-collector-agent
+      containers:
+      - image: mdrrakiburrahman/opentelemetry-collector-contrib-dev:latest
+        imagePullPolicy: Always
+        name: otel-collector
+        env:
+          - name: K8S_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: K8S_NODE_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          - name: K8S_POD_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          - name: K8S_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: K8S_POD_UID
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.uid
+          - name: K8S_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+        resources:
+          limits:
+            cpu: 1
+            memory: 2Gi
+          requests:
+            cpu: 0.5
+            memory: 1Gi
+        ports:
+        - containerPort: 55679 # Default endpoint for ZPages.
+        - containerPort: 9411 # Default endpoint for Zipkin receiver.
+        - containerPort: 8888  # Default endpoint for querying metrics.
+        - name: fluentforward
+          hostPort: 18006
+          containerPort: 8006  # fluent.
+        volumeMounts:
+        - name: otel-collector-config-vol
+          mountPath: /etc/otel # For my demo image only - switch back to /etc/otelcol-contrib for official image
+        - name: otel-cluster-config-vol
+          mountPath: /certs
+      volumes:
+        - configMap:
+            name: otel-collector-conf
+            items:
+              - key: otel-collector-config
+                path: config.yaml
+          name: otel-collector-config-vol
+        - configMap:
+            name: otel-cluster-config
+            items:
+              - key: ca.crt
+                path: ca.crt
+              - key: fluentbit-cert.pem
+                path: fluentbit-cert.pem
+              - key: fluentbit-key.pem
+                path: fluentbit-key.pem
+          name: otel-cluster-config-vol

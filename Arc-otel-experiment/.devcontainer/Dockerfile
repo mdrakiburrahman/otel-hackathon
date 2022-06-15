@@ -81,7 +81,9 @@ RUN wget --quiet https://releases.hashicorp.com/terraform/${TF_Version}/terrafor
 RUN apt-get update \
     && apt-get install tree -y \
     && apt-get install make -y \
-    && apt-get install -y kafkacat
+    && apt-get install kafkacat -y \
+    && apt-get install protobuf-compiler -y
+
 
 # Clean up
 RUN apt-get autoremove -y \
